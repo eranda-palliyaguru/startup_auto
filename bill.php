@@ -80,13 +80,14 @@ body {
 	  <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-7">
-        <img src="RHN Logo.jpg" width="145" alt="">
-         <h5> <b>RHN TRADING COMPANY (PVT) LTD</b></h5>
-         <p>NO. 325/6, PAHALA BOMITIYA <BR>
-         KADUWELA<br> <br>
-         Mobile: 070-7485485<br>
-         E-mail: info@rhntrading.com<br>
-         www.rhntrading.com <br><br>
+        <img src="bill.jpg" width="145" alt="">
+         <h5> <b>STARTUP Auto Care</b></h5>
+         <p>52/B/1, 10th Mile Post,  <br>
+			Katuwawala,  <br>
+			Boralasgauwa <BR>
+         <br>
+         Call: 0112 150 400<br>
+         E-mail: startupautoare@gmail.com<br><br>
          Bill To:<br>
          <?php echo $cus_name; ?>
 
@@ -238,7 +239,7 @@ body {
 <?php if($co=="qt"){ ?>           
 Validity Period : Two weeks from the date of estimate.<br>
 <?php } ?>
-Cheque should be drawn in favour of "RHN TRADING COMPANY (PVT) LTD" <br><br>
+Cheque should be drawn in favour of "STARTUP Auto Care" <br><br>
 <img src="img/cloud arm name.svg" width="100" alt="">
 	  
 	
