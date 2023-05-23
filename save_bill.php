@@ -42,7 +42,7 @@ $result = $db->prepare("SELECT sum(price) FROM sales_list WHERE invoice_no = '$a
 
 
 
-$result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$a1' and qty_type=''");
+$result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$a1' ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
@@ -56,20 +56,6 @@ $q = $db->prepare($sql);
 $q->execute(array($qty,$id));
 		}
 
-
-$result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$a1' and qty_type='com' ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){
-        $id = $row['product_id'];
-		$qty = $row['qty'];
-			
-$sql = "UPDATE product 
-        SET qty_com=qty_com-?
-		WHERE product_id=?";
-$q = $db->prepare($sql);
-$q->execute(array($qty,$id));
-		}
 
 
 
@@ -146,7 +132,7 @@ $q = $db->prepare($sql);
 $q->execute(array($job_type,$vehicle_no));
 
 
-        $result = $db->prepare("SELECT * FROM customer WHERE vehicle_no='$vehicle_no' ");
+        $result = $db->prepare("SELECT * FROM vehicle WHERE vehicle_no='$vehicle_no' ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
@@ -197,65 +183,7 @@ $q->execute(array($job_type,$vehicle_no));
 		$date5=$row1['date'];
 		}
 			 
-			//echo $rs1;
-			
-                  $date =  $date;
-				  $sday= strtotime( $date1);
-                  $nday= strtotime($date);
-                  $tdf= abs($nday-$sday);
-                  $nbday1= $tdf/86400;
-                  $rs1= intval($nbday1);
-		 
-			      $date =  $date1;
-				  $sday= strtotime( $date2);
-                  $nday= strtotime($date);
-                  $tdf= abs($nday-$sday);
-                  $nbday1= $tdf/86400;
-                  $rs2= intval($nbday1);
-			
-			      $date =  $date2;
-				  $sday= strtotime( $date3);
-                  $nday= strtotime($date);
-                  $tdf= abs($nday-$sday);
-                  $nbday1= $tdf/86400;
-                  $rs3= intval($nbday1);
-			
-			      $date =  $date3;
-				  $sday= strtotime( $date4);
-                  $nday= strtotime($date);
-                  $tdf= abs($nday-$sday);
-                  $nbday1= $tdf/86400;
-                  $rs4= intval($nbday1);
-			
-			      $date =  $date4;
-				  $sday= strtotime( $date5);
-                  $nday= strtotime($date);
-                  $tdf= abs($nday-$sday);
-                  $nbday1= $tdf/86400;
-                  $rs5= intval($nbday1);
-			
-			$xb=5;$last_day=$rs5;
-			if($rs1>1000){ $rs1=0; $last_day=0;}
-			if($rs2>1000){ $rs2=0;$xb=1; $last_day=$rs1;}
-			if($rs3>1000){ $rs3=0;$xb=2; $last_day=$rs2;}
-			if($rs4>1000){ $rs4=0;$xb=3; $last_day=$rs3;}
-			if($rs5>1000){ $rs5=0;$xb=4; $last_day=$rs4;}
-			
-			
-			
-			$f_rs=$rs1+$rs2+$rs3+$rs4+$rs5;
-			$f_rs= $f_rs/$xb;
-			
-			$reset=$f_rs+$last_day;
-			$reset=$reset/2;
-			$reset= number_format($reset,0);
-			
-$sql = "UPDATE customer 
-        SET day=?
-		WHERE customer_id=?";
-$q = $db->prepare($sql);
-$q->execute(array($reset,$customer_id));
-
+	
 		}
 
 

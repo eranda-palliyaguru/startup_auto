@@ -19,7 +19,7 @@ $mechanic=0;
 
 
 
-$result = $db->prepare("SELECT * FROM customer WHERE customer_id = '$a1' ");
+$result = $db->prepare("SELECT * FROM vehicle WHERE id = '$a1' ");
 
 		$result->bindParam(':userid', $res);
 		$result->execute();
@@ -27,7 +27,6 @@ $result = $db->prepare("SELECT * FROM customer WHERE customer_id = '$a1' ");
             $c = $row['customer_name'];
 			 $model = $row['model'];
 			$a = $row['vehicle_no'];
-			$iina = "-22".$row['vehicle_no'];
 		}
 $result = $db->prepare("SELECT * FROM job WHERE vehicle_no = '$a' and type='active' ");
 		$result->bindParam(':userid', $res);
@@ -52,14 +51,6 @@ if($mechanic > 0){	$b=$old_invo; }
 
  }else{
 
-
-
-
-$sql = "UPDATE  sales_list
-        SET invoice_no=?
-		WHERE invoice_no=?";
-$q = $db->prepare($sql);
-$q->execute(array($b,$iina));
 
 $e = date("Y-m-d");
 

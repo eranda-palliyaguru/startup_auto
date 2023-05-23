@@ -2,16 +2,14 @@
 session_start();
 include('connect.php');
 date_default_timezone_set("Asia/Colombo");
-$customer_id = $_POST['cus'];
+$vehicle_id = $_POST['cus'];
 
-	$result = $db->prepare("SELECT * FROM customer WHERE customer_id = '$customer_id' ");
-
+	$result = $db->prepare("SELECT * FROM vehicle WHERE id = '$vehicle_id' ");
 		$result->bindParam(':userid', $res);
-
 		$result->execute();
-
 		for($i=0; $row = $result->fetch(); $i++){
             $vehicle = $row['vehicle_no'];
+			$customer_id=$row['customer_id'];
 		}
 
 	$result = $db->prepare("SELECT * FROM job WHERE vehicle_no = '$vehicle' and type='active' and category='' ");
@@ -93,9 +91,9 @@ $date=date("Y-m-d");
 				}
 $nba=1;
 	
-$sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id)";
+$sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id)";
 $q = $db->prepare($sql);
-$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id));
+$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id));
 
 //echo $customer_id;
 

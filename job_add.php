@@ -83,13 +83,13 @@ include_once("sidebar.php");
                   </div>
                 <select class="form-control select2" name="cus" style="width: 100%;" autofocus required>
 				  <?php 
-			 $result = $db->prepare("SELECT * FROM customer ");
+			 $result = $db->prepare("SELECT * FROM vehicle ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
 			
 	?>
-		<option value="<?php echo $row['customer_id'];?>"><?php echo $row['customer_name']; ?> <?php echo $row['vehicle_no']; ?> </option>
+		<option value="<?php echo $row['id'];?>"><?php echo $row['vehicle_no']; ?> ( <?php echo $row['manufacture']; ?>-<?php echo $row['model']; ?> ) </option>
 	<?php
 				}
 			?>

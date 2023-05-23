@@ -100,7 +100,7 @@ return false;
 		<form method="post" action="sales_save.php">
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="form-group">
 				  <div class="input-group">
 				   <div class="input-group-addon">
@@ -127,7 +127,7 @@ return false;
                   <div class="input-group-addon">
                     <label>Qty</label>
                   </div>
-                   <input type="number" class="form-control" name="qty" tabindex="2" >
+                   <input type="number" class="form-control" value="1" name="qty" tabindex="2" >
                 </div>
         </div>
         </div>
@@ -464,7 +464,7 @@ $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$invo' ");
 		$job_type=$row1['job_type'];
 		}
 		
-		$result1 = $db->prepare("SELECT * FROM customer WHERE customer_id='$customer_id' ");
+		$result1 = $db->prepare("SELECT * FROM customer WHERE id='$customer_id' ");
 		$result1->bindParam(':userid', $a1);
 		$result1->execute();
 		for($i=0; $row1 = $result1->fetch(); $i++){

@@ -45,9 +45,9 @@ $date=date("Y-m-d");
 
 
 // query
-$sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,dic,qty,code,profit,type,qty_type,date) VALUES (:a,:b,:c,:d,:e,:f,:g,:pro,:type,:type_q,:date)";
+$sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,dic,qty,code,profit,type,date) VALUES (:a,:b,:c,:d,:e,:f,:g,:pro,:type,:date)";
 $ql = $db->prepare($sql);
-$ql->execute(array(':a'=>$a1,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g,':pro'=>$profit,':type'=>$type,':type_q'=>$type_q,':date'=>$date));
+$ql->execute(array(':a'=>$a1,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g,':pro'=>$profit,':type'=>$type,':date'=>$date));
 header("location: sales.php?id=$c");
 
 

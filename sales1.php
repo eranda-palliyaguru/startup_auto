@@ -88,16 +88,16 @@ include_once("sidebar.php");
 		$result1->bindParam(':userid', $res);
 		$result1->execute();
 		for($i=0; $row1 = $result1->fetch(); $i++){
-			$job_v= $row1['vehicle_no'];
+			$cus_id= $row1['cus_id'];
 			$kmmm= $row1['km'];
 			
-			 $result = $db->prepare("SELECT * FROM customer WHERE vehicle_no='$job_v' ");
+			 $result = $db->prepare("SELECT * FROM customer WHERE id='$cus_id' ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
 			
 	?>
-		<option value="<?php echo $row['customer_id'];?>"><?php echo $row['customer_name']; ?> <?php echo $row['vehicle_no']; ?> - (<?php echo $kmmm; ?>Km)  </option>
+		<option value="<?php echo $row['id'];?>"><?php echo $row['customer_name']; ?> <?php echo $row1['vehicle_no']; ?> - (<?php echo $kmmm; ?>Km)  </option>
 	<?php
 				}}
 			?>

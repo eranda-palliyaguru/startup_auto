@@ -511,11 +511,18 @@ $m=$date2->i;
 										   
 					$vehicle=$row['vehicle_no'];
 					$idi=0;
-				$result1 = $db->prepare("SELECT * FROM customer WHERE vehicle_no='$vehicle'");
+				$result1 = $db->prepare("SELECT * FROM vehicle WHERE vehicle_no='$vehicle'");
 				$result1->bindParam(':userid', $date);
                 $result1->execute();
                 for($i=0; $row1 = $result1->fetch(); $i++){
-				$idi=$row1['customer_id'];	
+                  $idi=$row1['id'];
+				$cus_id=$row1['customer_id'];	
+				}
+
+        $result1 = $db->prepare("SELECT * FROM customer WHERE id='$cus_id'");
+				$result1->bindParam(':userid', $date);
+                $result1->execute();
+                for($i=0; $row1 = $result1->fetch(); $i++){	
 					$cus_name=$row1['customer_name'];
 					$phone_no=$row1['contact'];
 					$phone_no2=$row1['contact2'];
