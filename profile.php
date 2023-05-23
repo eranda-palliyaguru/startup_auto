@@ -62,7 +62,7 @@ include_once("sidebar.php");
 	
 	<?php
 	$g = $_GET['id'];
-                $result = $db->prepare("SELECT * FROM customer WHERE customer_id='$g' ");
+                $result = $db->prepare("SELECT * FROM vehicle WHERE id='$g' ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){
@@ -71,11 +71,11 @@ include_once("sidebar.php");
 		$vehicle_no=$row['vehicle_no'];
 			$color=$row['color'];
 			$model=$row['model'];
-			$bye_date=$row['bye_date'];
+			$bye_date=$row['manufacture_year'];
 			$chassis_no=$row['chassis_no'];
 			$engine_no=$row['engine_no'];
-			$birthday=$row['birthday'];
-			$gend=$row['gend'];
+
+      $cus_id=$row['customer_id'];
 			
 			
 		
@@ -120,7 +120,7 @@ include_once("sidebar.php");
                   <b>Chassis Number</b> <a class="pull-right"><?php echo $chassis_no;?></a>
                 </li>
 				  <li class="list-group-item">
-                  <b>Bye Date</b> <a class="pull-right"><?php echo $bye_date;?></a>
+                  <b>Manufacture Year</b> <a class="pull-right"><?php echo $bye_date;?></a>
                 </li>
               </ul>
 
@@ -136,8 +136,7 @@ include_once("sidebar.php");
             <!-- /.box-header -->
             <div class="box-body">
               <?php
-	$g = $_GET['id'];
-                $result = $db->prepare("SELECT * FROM customer WHERE customer_id='$g' ");
+                $result = $db->prepare("SELECT * FROM customer WHERE id='$cus_id' ");
 		$result->bindParam(':userid', $res);
 		$result->execute();
 		for($i=0; $row = $result->fetch(); $i++){	
@@ -147,7 +146,7 @@ include_once("sidebar.php");
 				
 				<ul class="list-group list-group-unbordered">
 				 <li class="list-group-item">
-                  <b>Name:</b> <i><?php echo $gend.$name=$row['customer_name'];?></i>
+                  <b>Name:</b> <i><?php echo $name=$row['customer_name'];?></i>
                 </li>
                 <li class="list-group-item">
                   <b>Address:</b>  <i><?php echo $address=$row['address'];?></i>
@@ -156,7 +155,7 @@ include_once("sidebar.php");
                   <b>Contact:</b>  <i><?php echo $contact=$row['contact'];?></i>
                 </li>
 				<li class="list-group-item">
-                  <b>Birthday:</b>  <i><?php echo $birthday;?></i>
+                  <b>Birthday:</b>  <i><?php echo $birthday=$row['birthday'];?></i>
                 </li>
 				<li class="list-group-item">
                   <b>Email:</b>  <i><?php echo $email=$row['email'];?></i>

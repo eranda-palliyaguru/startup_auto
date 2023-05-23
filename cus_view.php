@@ -92,9 +92,9 @@ return false;
                 <tr>
                   <th>Customer ID</th>
 				  <th>Vehicle No</th>
-                  <th>Model</th>
 				  <th>Customer Name</th>
-                  <th>Contact No</th>
+                  <th>Fuel Type</th>
+                  <th>Model</th>
                   <th>View</th>
                 </tr>
 				
@@ -103,7 +103,7 @@ return false;
                 <tbody>
 				<?php
    
-   $result = $db->prepare("SELECT * FROM customer   ");
+   $result = $db->prepare("SELECT * FROM vehicle   ");
 				$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
@@ -113,19 +113,15 @@ return false;
 				
 			?>
                 <tr>
-				  <td><?php echo $row['customer_id'];?></td>
+				  <td><?php echo $row['id'];?></td>
 				  <td><?php echo $vehi=$row['vehicle_no'];?></td>
-                  <td><?php echo $row['model'];?></td>
-                  <td><?php echo $row['customer_name'];?></td>
-                  <td><?php echo $row['contact'];?></td>
                   
-				  <td><a href="profile.php?id=<?php echo $row['customer_id'];?>" >
-					  <button class="btn btn-info"><i   class="glyphicon glyphicon-user"></i></button></a>
-	    <a href="deta_enter.php?id=<?php echo $vehi;?>" >
-		<button class="btn btn-danger"><i   class="glyphicon glyphicon-trash"></i></button></a>
-					  <a href="deta_enter.php?id=<?php echo $vehi;?>" >
-		<button class="btn btn-success"><i   class="fa fa-file-text-o"></i></button></a>
-					</td>
+                  <td><?php echo $row['customer_name'];?></td>
+                  <td><?php echo $row['fuel_type'];?></td>
+                  <td><?php echo $row['manufacture']." - ".$row['model'];?></td>
+                  
+				  <td><a href="profile.php?id=<?php echo $row['id'];?>" >
+					  <button class="btn btn-info"><i   class="glyphicon glyphicon-user"></i></button></a></td>
 				   <?php 
 				}
 				?>
