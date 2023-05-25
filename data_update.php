@@ -1,19 +1,20 @@
 <?php 
 include('connect.php');
 
-$result = $db->prepare("SELECT * FROM sales_list ");
+$result = $db->prepare("SELECT * FROM product ");
 $result->bindParam(':userid', $date);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
-    $name=$row['profit'];
-    $id=$row['invoice_no'];
+  
+    $pro_id=$row['product_id'];
+    $id=$row['product_systemid'];
 
 
-echo $name." <br>";
 
-    $sql = "UPDATE sales
-        SET profit=profit+?
-		WHERE invoice_number=?";
+
+    $sql = "UPDATE use_product
+        SET main_product=?
+		WHERE system_id=?";
 $q = $db->prepare($sql);
-$q->execute(array($name,$id));
+$q->execute(array($pro_id,$id));
 }
