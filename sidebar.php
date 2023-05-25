@@ -6,9 +6,9 @@
     <!-- Logo -->
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>arm</span>
+      <span class="logo-mini"><b>C</b>ARM</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><i class="fa fa-cloud"></i><b> arm</b></span>
+      <span class="logo-lg">CLOUD<b> ARM</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -35,37 +35,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-check-square-o"></i>
-              <span class="label label-success"><?php echo $count; ?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have <?php echo $count; ?> Payment</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-				
-				
-				
-                  <li>
-                    <a href="pay_rp.php?d1=<?php echo $date;?>&d2=<?php echo $date;?>">
-                      <i class="fa fa-user text-green"></i> 
-					  
-					  </a>
-                    
-                  </li>
-                  <!-- end message -->
-                    
-				<?php  ?>
-					
-					
-					
-                </ul>
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
+
           <!-- Notifications: style can be found in dropdown.less -->
 		  
 		  
@@ -81,32 +51,7 @@
 				$rate=0;				
 			?>
   
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-credit-card"></i>
-              <span class="label label-warning"><?php echo $rv; ?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have <?php echo $rv; ?> notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">           
-  <?php
-		include('connect.php');
- date_default_timezone_set("Asia/Colombo");
-                 $date =  date("Y/m/d");					
-				$rate=0;	
-			?>
-                  <li>
-                    <a href="delay payment.php?id=day">
-                      <i class="fa fa-user text-yellow"></i> <?php echo $row['cus_name']; ?>
-                    </a>
-                  </li>  
-                </ul>
-              </li>
-              <li class="footer"><a href="delay payment.php?id=week">View all</a></li>
-            </ul>
-          </li>
+
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -326,7 +271,6 @@
              <li><a href="sales.php?id=pu<?php echo date("ymdhis");?>"><i class="fa fa-circle-o text-yellow"></i>GRN</a></li>
             <li><a href="supplier.php"><i class="fa fa-circle-o text-yellow"></i>Supplier</a></li>
             <li><a href="supplier_payment.php"><i class="fa fa-circle-o text-red"></i>Supplier payment</a></li>
-            <li><a href="supplier_payment.php"><i class="fa fa-circle-o text-red"></i>Row Materials</a></li>
           </ul>
         </li>
 		  

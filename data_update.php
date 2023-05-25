@@ -1,20 +1,20 @@
 <?php 
 include('connect.php');
 
-$result = $db->prepare("SELECT * FROM product ");
+$result = $db->prepare("SELECT * FROM use_product ");
 $result->bindParam(':userid', $date);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
   
-    $pro_id=$row['product_id'];
-    $id=$row['product_systemid'];
+    $type="Materials";
+    $id=$row['product_barcode'];
 
 
 
 
-    $sql = "UPDATE use_product
-        SET main_product=?
-		WHERE system_id=?";
+    $sql = "UPDATE sales
+        SET vehicle_id=?
+		WHERE vehicle_no=?";
 $q = $db->prepare($sql);
-$q->execute(array($pro_id,$id));
+$q->execute(array($type,$id));
 }

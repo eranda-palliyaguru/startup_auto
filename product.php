@@ -261,7 +261,7 @@ include_once("sidebar.php");
                                                                         style="width: 100%;" id="mat">
 
                                                                         <?php
-                                                                            $result = $db->prepare("SELECT * FROM product ");
+                                                                            $result = $db->prepare("SELECT * FROM product WHERE type='Materials' ");
 		                                                                        $result->bindParam(':userid', $res);
 		                                                                        $result->execute();
 		                                                                        for($i=0; $row = $result->fetch(); $i++){
