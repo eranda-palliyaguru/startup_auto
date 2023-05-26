@@ -17,6 +17,9 @@ if($c=="Product"){
 if($c=="Materials"){
     $f = $_POST['re_order'];
 }
+if($c=="Quick"){
+    $rack = $_POST['category'];
+}
 
 
 $time=date('Y-m-d H:i:s');

@@ -80,14 +80,15 @@ include_once("sidebar.php");
 			
 			
 		
-		}
+		
 	  
-	  $result = $db->prepare("SELECT * FROM model WHERE name='$model' ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){
-		$parth=$row['parth'];
-		$model_id=$row['id'];
+	  $result1 = $db->prepare("SELECT * FROM model WHERE name='$model' ");
+		$result1->bindParam(':userid', $res);
+		$result1->execute();
+		for($i=0; $row1 = $result1->fetch(); $i++){
+		$parth=$row1['parth'];
+		$model_id=$row1['id'];
+        $manufacture=$row1['manufacture_name'];
 		}
 	  
 	?>
@@ -112,6 +113,15 @@ include_once("sidebar.php");
                                     <b>Model</b> <a class="pull-right"><?php echo $model;?></a>
                                 </li>
                                 <li class="list-group-item">
+                                    <b>Manufacture</b> <a class="pull-right"><?php echo $manufacture;?></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Manufacture Year</b> <a class="pull-right"><?php echo $bye_date;?></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Transmission Type</b> <a class="pull-right"><?php echo $row['transmission_type'];?></a>
+                                </li>
+                                <li class="list-group-item">
                                     <b>color</b> <a class="pull-right"><?php echo $color;?></a>
                                 </li>
                                 <li class="list-group-item">
@@ -120,15 +130,13 @@ include_once("sidebar.php");
                                 <li class="list-group-item">
                                     <b>Chassis Number</b> <a class="pull-right"><?php echo $chassis_no;?></a>
                                 </li>
-                                <li class="list-group-item">
-                                    <b>Manufacture Year</b> <a class="pull-right"><?php echo $bye_date;?></a>
-                                </li>
                             </ul>
 
                             <a href="cus_view.php" class="btn btn-primary btn-block"><b>Back</b></a>
                         </div>
                         <!-- /.box-body -->
                     </div>
+                    <?php } ?>
                     <!-- /.box about me -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -174,8 +182,8 @@ include_once("sidebar.php");
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">About</a></li>
-
+                            <li class="active"><a href="#activity" data-toggle="tab">INVOICE</a></li>
+                            <li><a href="#service" data-toggle="tab">Service Data</a></li>
                             <li><a href="#settings" data-toggle="tab">Settings</a></li>
                         </ul>
                         <div class="tab-content">
@@ -202,7 +210,7 @@ include_once("sidebar.php");
                                         </i>
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i>
-                                                <?php echo $row['date'];?></span>
+                                                <?php echo $row['time'];?></span>
                                             <h3 class="timeline-header"><a href="#">Invoice no:</a>
                                                 <?php echo $row['invoice_number'];?></h3>
                                             <div class="timeline-body">
@@ -249,6 +257,66 @@ include_once("sidebar.php");
                             </div>
                             <!-- /.tab-pane -->
 
+                            <div class="tab-pane" id="service">
+                            <?php
+                                       $result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' AND plus_km > 0 ORDER by transaction_id DESC ");
+		                                   $result1->bindParam(':userid', $res);
+		                                   $result1->execute();
+		                                   for($i=0; $row = $result1->fetch(); $i++){
+	                                        ?>
+                                <ul class="timeline timeline-inverse">
+                                    <!-- timeline time label -->
+                                    <li class="time-label">
+                                        <span class="bg-blue">
+                                            <?php echo $row['date'];?>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-check bg-green"></i>
+                                        </i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i>
+                                                <?php echo $row['time'];?></span>
+                                            <h3 class="timeline-header"><a href="#">Invoice no:</a>
+                                                <?php echo $row['invoice_number'];?></h3>
+                                            <div class="timeline-body">
+                                                <a class="btn btn-warning btn-xs"><?php echo $row['comment']; ?></a>
+                                                <a class="btn btn-success btn-xs"><?php echo $row['km']; ?> Km</a><br>
+                                                <table id="example2" class="table table-bordered table-hover ">
+                                                    <tr>
+                                                        <th>Product Name</th>
+                                                        <th>QTY</th>
+                                                        <th>Dic (Rs.)</th>
+                                                        <th>Price (Rs.)</th>
+                                                    </tr>
+                                                    <?php $invo=$row['invoice_number'];
+			                                             $total=0;
+                                                   $result = $db->prepare("SELECT * FROM sales_list WHERE invoice_no = '$invo' ");
+		                                               $result->bindParam(':userid', $res);
+		                                               $result->execute();
+		                                               for($i=0; $row1 = $result->fetch(); $i++){
+	                                                  ?>
+                                                    <tr>
+                                                        <td><?php echo $row1['name']; ?></td>
+                                                        <td><?php echo $row1['qty']; ?></td>
+                                                        <td><?php echo $row1['dic']; ?></td>
+                                                        <td><?php echo $row1['price']; ?></td>
+                                                    </tr>
+                                                    <?php
+			
+		                                                   }	?>
+                                                </table>
+                                            </div>
+                                            <div class="timeline-footer">
+                                                <a class="btn btn-success btn-xs">Rs.<?php echo $row['amount']; ?></a>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <?php }		?>
+
+                                </ul>
+                            </div>
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane" id="settings">
@@ -335,16 +403,16 @@ include_once("sidebar.php");
                                                 <option value="<?php echo $model;?>"><?php echo $model; ?> </option>
 
                                                 <?php
-                $result = $db->prepare("SELECT * FROM model ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){
-	?>
+                                                $result = $db->prepare("SELECT * FROM model ");
+		                                        $result->bindParam(':userid', $res);
+		                                        $result->execute();
+		                                        for($i=0; $row = $result->fetch(); $i++){
+	                                          ?>
                                                 <option value="<?php echo $row['name'];?>"><?php echo $row['name']; ?>
                                                 </option>
-                                                <?php
-				}
-			?>
+                                                    <?php
+				                                    }
+			                                        ?>
                                             </select>
 
                                         </div>

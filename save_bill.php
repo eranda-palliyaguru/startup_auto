@@ -4,7 +4,7 @@ include('connect.php');
 $a1 = $_POST['invoice'];
 $ar = $_POST['amount'];
 $type = $_POST['type'];
-//$c = $_POST['cus_name'];
+$note = $_POST['note'];
 $email=$_POST['email'];
 $km=$_POST['km'];
 date_default_timezone_set("Asia/Colombo"); 
@@ -113,10 +113,11 @@ $result1 = $db->prepare("SELECT * FROM mechanic WHERE id='$mechanic_id' ");
 $b = $ar-$a;
 $c = "active";
 $date=date("Y-m-d");
+$time=date('H:i:s');
 // query
-$sql = "UPDATE  sales SET amount=?,balance=?,action=?,profit=?,labor_cost=?,pay_type=?,date=?,mechanic_id=?,mechanic=?,email=?,plus_km=? WHERE invoice_number=?";
+$sql = "UPDATE  sales SET amount=?,balance=?,action=?,profit=?,labor_cost=?,pay_type=?,date=?,mechanic_id=?,mechanic=?,email=?,plus_km=?,comment=?,time=? WHERE invoice_number=?";
 $ql = $db->prepare($sql);
-$ql->execute(array($a,$b,$c,$profit,$labor_cost,$type,$date,$mechanic_id,$mechanic,$email,$km,$a1));
+$ql->execute(array($a,$b,$c,$profit,$labor_cost,$type,$date,$mechanic_id,$mechanic,$email,$km,$note,$time,$a1));
 
 $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$a1' ");
 		$result1->bindParam(':userid', $a1);

@@ -6,7 +6,7 @@ date_default_timezone_set("Asia/Colombo");
 $a1 = $_POST['name'];
 $f = $_POST['qty'];
 $e = $_POST['dis'];
-$price = $_POST['price'];
+
 $c = $_POST['invoice'];
 $type_q = 0;
 
@@ -27,9 +27,6 @@ $result = $db->prepare("SELECT * FROM product WHERE product_id = '$a1' ");
 
 if($co=="pu"){$d=$cost;}
 
-if($price>0){
-	$d=$price;
-}
 
 $e=$d/100*$e;
 
@@ -38,16 +35,16 @@ $d=$d-$e;
 $profit=$d-$cost;
 $profit=$profit*$f;
 
-$d=$d*$f;
+$amount=$d*$f;
 $e=$e*$f;
 
 $date=date("Y-m-d");
 
 
 // query
-$sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,dic,qty,code,profit,type,date) VALUES (:a,:b,:c,:d,:e,:f,:g,:pro,:type,:date)";
+$sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,dic,qty,code,profit,type,date,amount,cost) VALUES (:a,:b,:c,:d,:e,:f,:g,:pro,:type,:date,:amount,:cost)";
 $ql = $db->prepare($sql);
-$ql->execute(array(':a'=>$a1,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g,':pro'=>$profit,':type'=>$type,':date'=>$date));
+$ql->execute(array(':a'=>$a1,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g,':pro'=>$profit,':type'=>$type,':date'=>$date,':amount'=>$amount,':cost'=>$cost));
 header("location: sales.php?id=$c");
 
 
