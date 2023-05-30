@@ -183,7 +183,7 @@ include_once("sidebar.php");
 		                                                                        for($i=0; $row = $result->fetch(); $i++){
 	                                                                         ?>
                                             <option value="<?php echo $row['product_id'];?>">
-                                                <?php echo $row['name']; ?>
+                                                <?php echo $row['name']; ?> __ Rs.<?php echo $row['sell'];?>
                                             </option>
                                             <?php
 				                                                                         }
