@@ -94,7 +94,7 @@ $q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':dat
 
 //echo $customer_id;
 
-$result = $db->prepare("SELECT * FROM job WHERE date='$date' ORDER by id ASC limit 0,1");
+$result = $db->prepare("SELECT * FROM job ORDER by id DESC limit 0,1");
 $result->bindParam(':userid', $date);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
@@ -114,8 +114,7 @@ WHERE id=?";
 $q = $db->prepare($sql);
 $q->execute(array($invo,$job_no));
 
-
- header("location: index.php"); 
+if(isset($_POST['end'])){header("location: app/index.php"); }else{header("location: index.php"); }
 	
 	
 }

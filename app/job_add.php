@@ -32,7 +32,7 @@
     <br>
 
     <center>
-        <form action="job_save.php" method="post">
+        <form action="../job_save.php" method="post">
             <div class="model-box" style="width: 350px;">
                 <label> Vehicle</label>
                 <select class="model-box select2 " name="cus" style="width: 80%;">
@@ -75,6 +75,7 @@
                 style="width: 90%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
             <br>
             <input type="submit" value="Save" class="login-btn">
+            <input type="hidden" name="end" value="app">
         </form>
     </center>
 </body>

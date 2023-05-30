@@ -114,10 +114,14 @@ $b = $ar-$a;
 $c = "active";
 $date=date("Y-m-d");
 $time=date('H:i:s');
+
+$credit=0;
+if($type=="Credit"){$credit=$a;}
+
 // query
-$sql = "UPDATE  sales SET amount=?,balance=?,action=?,profit=?,labor_cost=?,pay_type=?,date=?,mechanic_id=?,mechanic=?,email=?,plus_km=?,comment=?,time=? WHERE invoice_number=?";
+$sql = "UPDATE  sales SET amount=?,balance=?,action=?,profit=?,labor_cost=?,pay_type=?,date=?,mechanic_id=?,mechanic=?,email=?,plus_km=?,comment=?,time=?,credit=? WHERE invoice_number=?";
 $ql = $db->prepare($sql);
-$ql->execute(array($a,$b,$c,$profit,$labor_cost,$type,$date,$mechanic_id,$mechanic,$email,$km,$note,$time,$a1));
+$ql->execute(array($a,$b,$c,$profit,$labor_cost,$type,$date,$mechanic_id,$mechanic,$email,$km,$note,$time,$credit,$a1));
 
 $result1 = $db->prepare("SELECT * FROM sales WHERE invoice_number='$a1' ");
 		$result1->bindParam(':userid', $a1);
@@ -132,60 +136,7 @@ $sql = "UPDATE job
 $q = $db->prepare($sql);
 $q->execute(array($job_type,$vehicle_no));
 
-
-        $result = $db->prepare("SELECT * FROM vehicle WHERE vehicle_no='$vehicle_no' ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){
-		$customer_id=$row['customer_id'];
-		$vehicle_no=$row['vehicle_no'];
-
-		$result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' and action='active' ORDER by transaction_id DESC limit 0,1 ");
-		$result1->bindParam(':userid', $res);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$date=$row1['date'];	
-		}
-
-
 	
-       $result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' and action='active' ORDER by transaction_id DESC limit 1,1 ");
-		$result1->bindParam(':userid', $res);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$date1=$row1['date'];	
-		}
-			
-	    $result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' and action='active' ORDER by transaction_id DESC limit 2,1 ");
-		$result1->bindParam(':userid', $res);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$date2=$row1['date'];	
-		}
-			
-	    $result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' and action='active' ORDER by transaction_id DESC limit 3,1 ");
-		$result1->bindParam(':userid', $res);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$date3=$row1['date'];
-		}
-			
-		$result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' and action='active' ORDER by transaction_id DESC limit 4,1 ");
-		$result1->bindParam(':userid', $res);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$date4=$row1['date'];
-		}
-			
-		$result1 = $db->prepare("SELECT * FROM sales WHERE vehicle_no='$vehicle_no' and action='active' ORDER by transaction_id DESC limit 5,1 ");
-		$result1->bindParam(':userid', $res);
-		$result1->execute();
-		for($i=0; $row1 = $result1->fetch(); $i++){
-		$date5=$row1['date'];
-		}
-			 
-	
-		}
 
 
 header("location: bill.php?id=$a1");
