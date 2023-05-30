@@ -486,9 +486,7 @@ include_once("sidebar.php");
                                                                             <option value="<?php echo $row['id'];?>">
                                                                                 <?php echo $row['name']; ?>
                                                                             </option>
-                                                                            <?php
-				                                                                         }
-			                                                                         ?>
+                                                                            <?php } ?>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -573,7 +571,7 @@ include_once("sidebar.php");
     function mataddy() {
         var mat = document.getElementById("mat").value;
         var qty = document.getElementById("qty").value;
-        var dd = fetch("product_sub_list_add.php?mat=" + mat + "l&qty=" + qty).then(responseText => responseText);
+        var dd = fetch("product_sub_list_add.php?mat=" + mat + "&qty=" + qty).then(responseText => responseText);
 
         document.getElementById("sub_list").innerHTML = responseText;
 
@@ -600,7 +598,7 @@ include_once("sidebar.php");
             }
         }
 
-        xmlhttp.open("GET", "product_sub_list_add.php?mat=" + mat + "l&qty=" + qty, true);
+        xmlhttp.open("GET", "product_sub_list_add.php?mat=" + mat + "&qty=" + qty, true);
         xmlhttp.send();
     }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<?php include('hed.php'); ?>
+    <?php include('hed.php'); ?>
 
 
 </head>
@@ -33,7 +33,7 @@
 
 
     <!-- small box -->
-
+    <?php $user_l=$_SESSION['SESS_LAST_NAME']; if($user_l=="admin") {?>
     <div class="hederbar" style="overflow-x:auto;">
         <table>
             <tr>
@@ -45,11 +45,13 @@
                                 </td>
                                 <td>
                                     <h4 style="color:#686868">Sales Total</h4>
-                                    <p style="padding-bottom: 5px; font-size: 25px; color:#959595;">Rs.<?php $date=date("Y-m-d");
+                                    <p style="padding-bottom: 5px; font-size: 25px; color:#959595;">
+                                        Rs.<?php $date=date("Y-m-d");
                                     $result = $db->prepare("SELECT sum(amount)  FROM sales  WHERE action='active' AND date = '$date' ORDER BY transaction_id DESC");
-    $result->bindParam(':userid', $date);
-    $result->execute();
-    for($i=0; $row = $result->fetch(); $i++){echo number_format($row['sum(amount)'],2);} ?></p>
+                                    $result->bindParam(':userid', $date);
+                                    $result->execute();
+                                    for($i=0; $row = $result->fetch(); $i++){echo number_format($row['sum(amount)'],2);} ?>
+                                    </p>
                                 </td>
                             </tr>
                         </table>
@@ -57,19 +59,20 @@
                 </td>
 
                 <td>
-                    <div
-                        class="model-box v-4">
+                    <div class="model-box v-4">
                         <table>
                             <tr>
                                 <td><i style="font-size:60px; margin:15px; color:#D1D1D1;" class="ion-stats-bars"></i>
                                 </td>
                                 <td>
                                     <h4 style="color:#686868">Expenses Total</h4>
-                                    <p style="padding-bottom: 5px; font-size: 25px; color:#959595;">Rs.<?php 
+                                    <p style="padding-bottom: 5px; font-size: 25px; color:#959595;">
+                                        Rs.<?php 
                                     $result = $db->prepare("SELECT sum(amount)  FROM expenses_records  WHERE date = '$date' ");
                                     $result->bindParam(':userid', $date);
                                     $result->execute();
-                                    for($i=0; $row = $result->fetch(); $i++){echo number_format($row['sum(amount)'],2);} ?></p>
+                                    for($i=0; $row = $result->fetch(); $i++){echo number_format($row['sum(amount)'],2);} ?>
+                                    </p>
                                 </td>
                             </tr>
                         </table>
@@ -77,8 +80,7 @@
                 </td>
 
                 <td>
-                    <div
-                        class="model-box v-4">
+                    <div class="model-box v-4">
                         <table>
                             <tr>
                                 <td><i style="font-size:60px; margin:15px; color:#D1D1D1; "
@@ -98,9 +100,12 @@
             </tr>
         </table>
     </div>
+    <?php } ?>
+    <br>
+    <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD NEW JOB</button> </a>
     <br>
     <?php 				  
-        $result = $db->prepare("SELECT job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact  FROM job INNER JOIN customer ON job.cus_id=customer.customer_id WHERE job.type='active'  ORDER by job.id ASC ");
+        $result = $db->prepare("SELECT job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
         $result->bindParam(':userid', $date);
         $result->execute();
         for($i=0; $row = $result->fetch(); $i++){ 
@@ -160,17 +165,36 @@ $m=$date2->i;
 
             </tr>
         </table>
-        <div align="left" style="width:100%;">
-            <a style="width:30%;" href="profile.php?id=<?php echo $row['customer_id']; ?>">
-                <div class="bg-<?php echo $color;?>" 
-                    style="color:#dbdbdb; width:30%; text-align: center; border-radius: 0px 15px 0px 15px ">
-                    <?php echo $time_on." ".$time_type;?></div>
-            </a>
-        </div>
+
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <div align="left" style="width:100%;">
+
+                        <div class="bg-<?php echo $color;?>"
+                            style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 15px 15px 15px ">
+                            <?php echo $time_on." ".$time_type;?></div>
+
+                    </div>
+                </td>
+
+                <td>
+                    <div align="right" style="width:100%;">
+                    <a href="sales.php?id=<?php echo "39493"; ?>">
+                        <div class="bg-green"
+                            style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 0px 15px 0px">
+                            invoice</div></a>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+
     </div>
     <?php } ?>
 
     <br><br>
+    <?php if($user_l=="admin") { ?>
     <div class="box box-solid " style="background-color: #0e0f1a;">
         <div class="box-header">
 
@@ -182,7 +206,7 @@ $m=$date2->i;
             <div class="chart" id="line-chart" style="height: 200px;"></div>
         </div>
     </div>
-
+    <?php } ?>
     <br><br>
 
 
@@ -209,7 +233,7 @@ $m=$date2->i;
             </i>
             <span class="nav-text">Search</span>
         </div>
-        
+
     </nav>
 </body>
 <!-- jQuery 2.2.3 -->

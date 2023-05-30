@@ -242,6 +242,14 @@
           </a>
         </li>
         
+        <li>
+          <a  href="package.php">
+            <i class="fa fa-tags"></i> <span>Package and Promotion</span>
+            <span class="pull-right-container">
+			
+            </span>
+          </a>
+        </li>
 		  
 		  <li>
           <a  href="expenses.php">
