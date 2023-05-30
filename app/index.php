@@ -105,7 +105,7 @@
     <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD NEW JOB</button> </a>
     <br>
     <?php 				  
-        $result = $db->prepare("SELECT job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
+        $result = $db->prepare("SELECT job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
         $result->bindParam(':userid', $date);
         $result->execute();
         for($i=0; $row = $result->fetch(); $i++){ 
@@ -180,7 +180,7 @@ $m=$date2->i;
 
                 <td>
                     <div align="right" style="width:100%;">
-                    <a href="sales.php?id=<?php echo "39493"; ?>">
+                    <a href="sales.php?id=<?php echo $row['invoice_no']; ?>">
                         <div class="bg-green"
                             style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 0px 15px 0px">
                             invoice</div></a>

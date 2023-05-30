@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Colombo");
 
 $a1 = $_POST['name'];
 $f = $_POST['qty'];
-$e = $_POST['dis'];
+$e = 0;
 
 $c = $_POST['invoice'];
 $type_q = 0;
@@ -28,7 +28,6 @@ $result = $db->prepare("SELECT * FROM product WHERE product_id = '$a1' ");
 if($co=="pu"){$d=$cost;}
 
 
-$e=$d/100*$e;
 
 $d=$d-$e;
 
@@ -45,7 +44,13 @@ $date=date("Y-m-d");
 $sql = "INSERT INTO sales_list (product_id,name,invoice_no,price,dic,qty,code,profit,type,date,amount,cost) VALUES (:a,:b,:c,:d,:e,:f,:g,:pro,:type,:date,:amount,:cost)";
 $ql = $db->prepare($sql);
 $ql->execute(array(':a'=>$a1,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g,':pro'=>$profit,':type'=>$type,':date'=>$date,':amount'=>$amount,':cost'=>$cost));
-header("location: sales.php?id=$c");
+
+if(isset($_POST['end'])){
+	header("location: app/sales.php?id=$c");
+}else{
+	header("location: sales.php?id=$c");
+}
+
 
 
 ?>

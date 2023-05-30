@@ -10,6 +10,8 @@ $vehicle_id = $_POST['cus'];
 		for($i=0; $row = $result->fetch(); $i++){
             $vehicle = $row['vehicle_no'];
 			$customer_id=$row['customer_id'];
+			$cus_name=$row['customer_name'];
+			$model=$row['model'];
 		}
 
 	$result = $db->prepare("SELECT * FROM job WHERE vehicle_no = '$vehicle' and type='active' and category='' ");
@@ -35,8 +37,6 @@ include("connect.php");
 <center>
 	<br>
 	
-					  
-
 <br><br><br>
  <div class="col-md-12">
 <div class="alert alert-danger alert-dismissible">
@@ -76,19 +76,16 @@ $product= str_replace(".","<br>",$product1);
 
 $date=date("Y-m-d");
 			 
- $result = $db->prepare("SELECT * FROM job WHERE date='$date' ORDER by id ASC limit 0,1");
- $result->bindParam(':userid', $date);
- $result->execute();
- for($i=0; $row = $result->fetch(); $i++){
-	$jid=$row['id'];
-}
+
 
  $result = $db->prepare("SELECT COUNT(id) FROM job WHERE date='$date' ");
 				$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
 					$jid=$row['COUNT(id)'];
-				}
+	}
+
+
 $nba=1;
 	
 $sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id)";
@@ -97,6 +94,25 @@ $q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':dat
 
 //echo $customer_id;
 
+$result = $db->prepare("SELECT * FROM job WHERE date='$date' ORDER by id ASC limit 0,1");
+$result->bindParam(':userid', $date);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){
+   $job_no=$row['id'];
+}
+
+$invo=date('ymdhis');
+$sql = "INSERT INTO sales (vehicle_no,invoice_number,customer_name,km,date,cashier,comment,type,customer_id,model,job_no,job_type) VALUES (:a,:b,:c,:d,:e,:f,:j,:type,:cus_id,:model,:job,:job_type)";
+$ql = $db->prepare($sql);
+$ql->execute(array(':a'=>$vehicle,':b'=>$invo,':c'=>$cus_name,':d'=>$km,':e'=>$date,':f'=>"",':j'=>"",':type'=>'',':cus_id'=>$customer_id,':model'=>$model,':job'=>$job_no,':job_type'=>$job_type));
+
+
+
+$sql = "UPDATE job
+SET invoice_no=?
+WHERE id=?";
+$q = $db->prepare($sql);
+$q->execute(array($invo,$job_no));
 
 
  header("location: index.php"); 

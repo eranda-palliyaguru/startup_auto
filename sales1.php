@@ -107,14 +107,6 @@ include_once("sidebar.php");
 				</div>
 			  
 			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
 			  <div class="col-md-4">
 			  <div class="form-group">
                 <div class="input-group date"> 
@@ -126,10 +118,6 @@ include_once("sidebar.php");
         </div>		
         </div>
 			 
-			  
-			  
-			  
-			  
 			  
               </div>        
               </div>
