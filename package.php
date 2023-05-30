@@ -183,7 +183,7 @@ include_once("sidebar.php");
 		                                                                        for($i=0; $row = $result->fetch(); $i++){
 	                                                                         ?>
                                             <option value="<?php echo $row['product_id'];?>">
-                                                <?php echo $row['name']; ?> __ Rs.<?php echo $row['sell'];?>
+                                            <?php echo $row['code'];?>  <?php echo $row['name']; ?> __ Rs.<?php echo $row['sell'];?>
                                             </option>
                                             <?php
 				                                                                         }
@@ -362,6 +362,8 @@ include_once("sidebar.php");
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("sub_list").innerHTML = xmlhttp.responseText;
+                document.getElementById("qty").value="";
+                document.getElementById("price").value="";
             }
         }
 
