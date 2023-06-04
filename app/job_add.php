@@ -34,6 +34,7 @@
         <form action="../job_save.php" method="post">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2 " name="cus" style="width: 100%;">
+                <option value="0">Vehicle No</option>
                     <?php 
 			 $result = $db->prepare("SELECT * FROM vehicle ");
 		$result->bindParam(':userid', $res);
