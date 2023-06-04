@@ -7,7 +7,7 @@ $job_no='1';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['photo'])) {
         $targetDir = 'job_img/';
-        $targetFile = $targetDir . date('ymdHis').".jpg";
+        $targetFile = $targetDir . basename($_FILES['photo']['name']);
 
         if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) {
             echo 'Photo uploaded successfully.';
