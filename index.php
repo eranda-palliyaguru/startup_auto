@@ -15,7 +15,7 @@ include("connect.php");
 	
 
 	
-$(document).ready(function(){
+$(document).ready(function(){ // set
 	setInterval(function(){
 		$("#job_cancel").load('index_cancel_appr.php')
     }, 50000);
@@ -286,8 +286,6 @@ else{
             <div class="inner">
 
               <h3>Rs.<?php echo $ex; ?></sup></h3>
-
-
 
               <p>Expenses Total </p>
 

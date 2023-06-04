@@ -4,6 +4,7 @@
 <head>
     <?php include('hed.php'); ?>
     <link rel="stylesheet" href="css/select2.app.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
     input {
         width: 80%;
@@ -20,9 +21,10 @@
         height: 40px;
     }
     </style>
+   
 </head>
 
-<body>
+<body >
     <?php include('preload.php'); include("../connect.php"); ?>
     <br><br>
     <a href="index.php"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
@@ -31,6 +33,13 @@
     <br>
 
     <center>
+    <h1>Capture Photo</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="capture-btn">Capture</button>
+
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+
+        
         <form action="../job_save.php" method="post">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2 " name="cus" style="width: 100%;">
@@ -118,7 +127,49 @@
 <!-- Select2 -->
 <script src="../../../plugins/select2/select2.full.min.js"></script>
 
+
+
 <script>
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                var video = document.getElementById('video');
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function(error) {
+                console.log("Error accessing camera: " + error);
+            });
+
+        document.getElementById('capture-btn').addEventListener('click', function() {
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob(function(blob) {
+                var formData = new FormData();
+                formData.append('photo', blob, 'photo.jpg');
+
+                $.ajax({
+                    url: 'photo_upload.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log('Photo uploaded successfully.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error uploading photo: ' + error);
+                    }
+                });
+            }, 'image/jpeg', 0.9);
+        });
+
+
+
+
 function back(id, op) {
     option = document.getElementById(op);
     if (op == "op1") {
