@@ -127,16 +127,23 @@
 <script type="text/javascript" src="js/cam/webcam.min.js"></script>
 
     <script ype="text/javascript">
-        function configure() {
-            Webcam.set({
-                with: 480,
-                height: 360,
-                image_format: 'jpeg',
-                jpeg_quality: 100
-            });
-
-            Webcam.attach('#cam');
+function configure() {
+    var constraints = {
+        video: {
+            facingMode: { exact: 'environment'}
         }
+    };
+
+    Webcam.set({
+        constraints: constraints,
+        width: 480,
+        height: 360,
+        image_format: 'jpeg',
+        jpeg_quality: 100
+    });
+
+    Webcam.attach('#cam');
+}
         function savePhoto() {
             Webcam.snap(function(data_uri){
                 document.getElementById('results').innerHTML = 
