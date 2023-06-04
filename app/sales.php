@@ -4,7 +4,7 @@
 <head>
     <?php include('hed.php'); ?>
     <!-- Select2 -->
-    <link rel="stylesheet" href="../../../plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="../../../plugins/select2/select2.app.css">
 </head>
 
 <body>
@@ -27,20 +27,20 @@
     <br>
 
     <form action="../sales_save.php" method="post">
-        <select class="select2" name="name" style="width: 80%;">
+        <select class="select2" id="product"  name="name" style="width: 78%;">
             <?php  $total=0;
                   $result = $db->prepare("SELECT * FROM product  ");
                  $result->bindParam(':userid', $res);
                  $result->execute();
                  for($i=0; $row = $result->fetch(); $i++){ ?>
-            <option value="<?php echo $row['product_id'];?>"><?php echo $row['name']; ?></option>
+            <option product_price="<?php echo $row['sell'];?>" value="<?php echo $row['product_id'];?>"><?php echo $row['name']; ?></option>
             <?php	} ?>
         </select>
         <input type="number" name="qty" class="model-box" style="width:15%;" placeholder="QTY">
         <input type="hidden" name="end" value="app">
         <input type="hidden" name="invoice" value="<?php echo $invo; ?>">
     </form>
-
+<b id="price_dis" style="margin: 10px;"></b>
     <br>
     <div class="model-box">
         <table style="width: 96%;  margin:2%; text-align:center;">
@@ -116,37 +116,6 @@
                 </div>
             </div>
 
-
-            
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
-                                Cash <i  class="card"></i>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="type" id="optionsRadios2" value="Card">
-                                Card <i class="card-outline"></i>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="type" id="optionsRadios2" value="Credit">
-                                Credit <i class="fa fa-credit-card"></i>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
             
             <?php if($email==""){}else{ ?>
             <div class="col-md-3">
@@ -161,9 +130,7 @@
                 <div class="model-box">
                     <!-- /btn-group -->
                     <input type="number" class="model-box" style="width:70%" name="km" value="5000">
-                    
                         <label>Km</label>
-                    
                 </div>
             </div>
 
@@ -171,6 +138,35 @@
 
             <div class="col-md-2 col-sm-4 col-lg-4" style="margin: 20px;">
                 <div class="model-box">
+                    <div class="row">
+                    <label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
+                                Cash 
+                            </label>
+                        </div>
+                    </label>
+
+                    <label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" id="optionsRadios1" value="Card">
+                                Card 
+                            </label>
+                        </div>
+                    </label>
+
+                    <label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" id="optionsRadios3" value="Credit">
+                                Credit 
+                            </label>
+                        </div>
+                    </label>
+
+                    </div>
                     <!-- /btn-group -->
                     <input type="number" style="width:50%"  class="model-box" name="amount" value="">
                     
@@ -186,6 +182,7 @@
         </form>
     </div>
     <br><br>
+    
     <div class="hederbar" style="overflow-x:auto;">
         <table>
             <tr>
@@ -225,6 +222,15 @@
 <script src="../../../plugins/select2/select2.full.min.js"></script>
 
 <script>
+
+
+$('#product').change(function () {
+    var price=$(this).find('option:selected').attr('product_price');
+    document.getElementById('price_dis').innerHTML="Price: <i style='color:#FF4A4A;'>"+ price+"</i>";
+});
+
+
+
 $(function() {
     //Initialize Select2 Elements
     $(".select2").select2();

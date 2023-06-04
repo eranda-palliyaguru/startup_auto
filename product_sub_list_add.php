@@ -25,6 +25,9 @@ for($i=0; $row = $result->fetch(); $i++){
     <tr >
         <td><?php echo $row['product_name']; ?></td>
         <td><?php echo $row['qty']; ?></td>
+        <td><b class="btn btn-danger dllpack" id="<?php echo $row['id']; ?>"
+                                                            onclick="dll(<?php echo $row['id']; ?>)"><i
+                                                                class="icon-trash">x</i></b></td>
     </tr>
 
 <?php } ?>

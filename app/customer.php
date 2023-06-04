@@ -21,8 +21,8 @@
     </center>
     <br>
     <?php include("../connect.php");
-    if(!$_GET["number"]){ $result = $db->prepare("SELECT *  FROM customer INNER JOIN model ON customer.model= model.name");}else{ $number=$_GET["number"];
-        $result = $db->prepare("SELECT *  FROM customer INNER JOIN model ON customer.model= model.name WHERE customer.vehicle_no='$number'");
+    if(!$_GET["number"]){ $result = $db->prepare("SELECT *  FROM vehicle INNER JOIN model ON vehicle.model= model.name");}else{ $number=$_GET["number"];
+        $result = $db->prepare("SELECT *  FROM vehicle INNER JOIN model ON vehicle.model= model.name WHERE vehicle.vehicle_no='$number'");
     }
     
     $result->bindParam(':userid', $date);

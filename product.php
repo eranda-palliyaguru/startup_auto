@@ -284,18 +284,24 @@ include_once("sidebar.php");
                                                                 <div class="col-md-12">
 
                                                                     <div class="form-group" id="sub_list">
-                                                                    <table width='100%' class='table'>
-                                                                        <?php $result = $db->prepare("SELECT * FROM use_product WHERE system_id ='' ");
+                                                                        <table width='100%' class='table'>
+                                                                            <?php $result = $db->prepare("SELECT * FROM use_product WHERE system_id ='' ");
                                                                              $result->bindParam(':userid', $res);
                                                                              $result->execute();
                                                                              for($i=0; $row = $result->fetch(); $i++){
                                                                                ?>
-                                                                        <tr>
-                                                                            <td><?php echo $row['product_name']; ?></td>
-                                                                            <td><?php echo $row['qty']; ?></td>
-                                                                        </tr>
+                                                                            <tr>
+                                                                                <td><?php echo $row['product_name']; ?>
+                                                                                </td>
+                                                                                <td><?php echo $row['qty']; ?></td>
+                                                                                <td><b class="btn btn-danger dllpack"
+                                                                                        id="<?php echo $row['id']; ?>"
+                                                                                        onclick="dll(<?php echo $row['id']; ?>)"><i
+                                                                                            class="icon-trash">x</i></b>
+                                                                                </td>
+                                                                            </tr>
 
-                                                                        <?php } ?>
+                                                                            <?php } ?>
                                                                         </table>
                                                                     </div>
                                                                 </div>
@@ -467,7 +473,7 @@ include_once("sidebar.php");
 
 
                                                         <div class="row">
-                                                        <div class="col-md-6">
+                                                            <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="input-group">
                                                                         <div class="input-group-addon">
@@ -568,6 +574,19 @@ include_once("sidebar.php");
     <script src="../../dist/js/demo.js"></script>
     <!-- Page script -->
     <script>
+        var qty = document.getElementById("qty");
+    qty.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            matadd();
+        }
+    });
+
+
+
     function mataddy() {
         var mat = document.getElementById("mat").value;
         var qty = document.getElementById("qty").value;
@@ -577,9 +596,6 @@ include_once("sidebar.php");
 
 
     }
-
-
-
 
 
     function matadd() {
@@ -599,6 +615,27 @@ include_once("sidebar.php");
         }
 
         xmlhttp.open("GET", "product_sub_list_add.php?mat=" + mat + "&qty=" + qty, true);
+        xmlhttp.send();
+
+        document.getElementById("qty").value="";
+    }
+
+    function dll(did) {
+
+        var xmlhttp;
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET", "material_dll.php?id=" + did, true);
         xmlhttp.send();
     }
 

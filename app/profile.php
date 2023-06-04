@@ -9,7 +9,7 @@
     <br> <a href="customer.php"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
     <?php include("../connect.php");
 $id=$_GET["id"];
-$result = $db->prepare("SELECT *  FROM customer  WHERE customer_id='$id'  ");
+$result = $db->prepare("SELECT *  FROM customer INNER JOIN vehicle ON customer.id=vehicle.customer_id  WHERE vehicle.id='$id'  ");
 $result->bindParam(':userid', $date);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){ 

@@ -185,9 +185,7 @@ include_once("sidebar.php");
                                             <option value="<?php echo $row['product_id'];?>">
                                             <?php echo $row['code'];?>  <?php echo $row['name']; ?> __ Rs.<?php echo $row['sell'];?>
                                             </option>
-                                            <?php
-				                                                                         }
-			                                                                         ?>
+                                            <?php }    ?>
                                         </select>
                                     </div>
 
@@ -348,6 +346,36 @@ include_once("sidebar.php");
 
 
     <script type="text/javascript">
+
+// Get the input field
+var amount_box = document.getElementById("price");
+var qty = document.getElementById("qty");
+
+// Execute a function when the user presses a key on the keyboard
+amount_box.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    matadd();
+    document.getElementById("mat").focus();
+  }
+});
+
+
+qty.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("price").focus();
+  }
+});
+
+
+
     function matadd() {
         var mat = document.getElementById("mat").value;
         var qty = document.getElementById("qty").value;

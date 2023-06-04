@@ -105,7 +105,7 @@
     <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD NEW JOB</button> </a>
     <br>
     <?php 				  
-        $result = $db->prepare("SELECT job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
+        $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
         $result->bindParam(':userid', $date);
         $result->execute();
         for($i=0; $row = $result->fetch(); $i++){ 
@@ -141,69 +141,74 @@ $m=$date2->i;
 					if($time_type=="hours"){ $color="blue";								   
 					if($time_on>4){ $color="yellow"; }	 } 
             ?>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+        <div style="border-radius: 15px; background-color: #181929; color:aliceblue; margin: 2%; ">
 
-    <div style="border-radius: 15px; background-color: #181929; color:aliceblue; margin: 2%; width:95%">
+            <table style="width:100%;  margin: 10px;">
+                <tr>
+                    <td>
+                        <h3 style="color:#D1D1D1; margin: 10px;"><?php echo $row['vehicle_no']; ?></h3>
+                    </td>
+                    <td></td>
+                    
+                </tr>
+                <tr>
+                    <td style="color:#959595"><?php echo $row['customer_name']; ?></td>
+                    <td style="color:#959595"><?php echo $row['contact']; ?></td>
+                </tr>
 
-        <table style="width:100%;  margin: 10px;">
-            <tr>
-                <td>
-                    <h3 style="color:#D1D1D1; margin: 10px;"><?php echo $row['vehicle_no']; ?></h3>
-                </td>
-                <td></td>
-                <td><span class="badge bg-green"><i class="fa fa-clock-o"></i>Active</span></td>
-            </tr>
-            <tr>
-                <td style="color:#959595"><?php echo $row['customer_name']; ?></td>
-                <td style="color:#959595"><?php echo $row['contact']; ?></td>
-            </tr>
+                <tr>
+                    <td></td>
+                    <td style="color:#686868"><?php echo $row['km']; ?> km</td>
+                </tr>
+                <tr>
 
-            <tr>
-                <td></td>
-                <td style="color:#686868"><?php echo $row['km']; ?> km</td>
-            </tr>
-            <tr>
+                </tr>
+            </table>
 
-            </tr>
-        </table>
+            <table style="width:100%">
+                <tr>
+                    <td>
+                        <div align="left" style="width:100%;">
 
-        <table style="width:100%">
-            <tr>
-                <td>
-                    <div align="left" style="width:100%;">
+                            <div class="bg-<?php echo $color;?>"
+                                style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 15px 15px 15px ">
+                                <?php echo $time_on." ".$time_type;?></div>
 
-                        <div class="bg-<?php echo $color;?>"
-                            style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 15px 15px 15px ">
-                            <?php echo $time_on." ".$time_type;?></div>
+                        </div>
+                    </td>
 
-                    </div>
-                </td>
 
-                <td>
-                    <div align="right" style="width:100%;">
-                    <a href="sales.php?id=<?php echo $row['invoice_no']; ?>">
-                        <div class="bg-green"
-                            style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 0px 15px 0px">
-                            invoice</div></a>
+                    <td>
+                        <div align="right" style="width:100%;">
+                            <a href="job_view.php?id=<?php echo $row['id']; ?>">
+                                <div class="bg-red"
+                                    style="color:#dbdbdb; width:100px;  text-align: center; border-radius: 15px 0px 15px 0px">
+                                    View</div>
+                            </a>
 
-                    </div>
-                </td>
-            </tr>
-        </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
+        </div>
     </div>
     <?php } ?>
 
     <br><br>
     <?php if($user_l=="admin") { ?>
-    <div class="box box-solid " style="background-color: #0e0f1a;">
-        <div class="box-header">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid " style="background-color: #0e0f1a;">
+            <div class="box-header">
 
 
-            <h3 class="box-title">Net Profit Graph</h3>
+                <h3 class="box-title">Net Profit Graph</h3>
 
-        </div>
-        <div class="box-body border-radius-none">
-            <div class="chart" id="line-chart" style="height: 200px;"></div>
+            </div>
+            <div class="box-body border-radius-none">
+                <div class="chart" id="line-chart" style="height: 200px;"></div>
+            </div>
         </div>
     </div>
     <?php } ?>
