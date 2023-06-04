@@ -3,7 +3,7 @@
 
 <head>
     <?php include('hed.php'); ?>
-    <link rel="stylesheet" href="../../../plugins/select2/select2.app.css">
+    <link rel="stylesheet" href="css/select2.app.css">
     <link rel="stylesheet" href="css/datepik.css">
     <style>
         
@@ -31,9 +31,11 @@
     <br><br>
     <h2 style="margin:15px">ADD NEW Booking</h2>
     <br>
-
+    <img src="img/booking.svg" alt="img" width="100%" >
     <center>
-        <form action="../job_save.php" method="post">
+
+    
+        <form action="../booking_save.php" method="post">
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2 " name="cus" style="width: 100%;">
                     <?php 
@@ -51,7 +53,7 @@
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2" name="emp" style="width: 100%;">
-                <option value="0"></option>
+                <option value="0">Select Employee </option>
 
                     <?php  
                 $result = $db->prepare("SELECT * FROM mechanic ");
@@ -83,7 +85,7 @@
                 style="width: 90%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-                <input type="text" name="d1" id="d1" class="model-box" readonly onclick="calender('d1')" required>
+                <input type="text" name="d1" id="d1" class="model-box" readonly onclick="calender('d1')" placeholder="Date" required>
             </div>
 
 

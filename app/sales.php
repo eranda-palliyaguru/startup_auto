@@ -4,7 +4,7 @@
 <head>
     <?php include('hed.php'); ?>
     <!-- Select2 -->
-    <link rel="stylesheet" href="../../../plugins/select2/select2.app.css">
+    <link rel="stylesheet" href="css/select2.app.css">
 </head>
 
 <body>

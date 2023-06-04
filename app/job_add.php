@@ -3,7 +3,7 @@
 
 <head>
     <?php include('hed.php'); ?>
-    <link rel="stylesheet" href="../../../plugins/select2/select2.app.css">
+    <link rel="stylesheet" href="css/select2.app.css">
     <style>
     input {
         width: 80%;
