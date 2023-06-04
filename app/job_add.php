@@ -4,6 +4,8 @@
 <head>
     <?php include('hed.php'); ?>
     <link rel="stylesheet" href="css/select2.app.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
     input {
         width: 80%;
@@ -23,7 +25,7 @@
    
 </head>
 
-<body onload="configure();">
+<body >
     <?php include('preload.php'); include("../connect.php"); ?>
     <br><br>
     <a href="index.php"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
@@ -32,11 +34,12 @@
     <br>
 
     <center>
-        <div class="container">
-        <div id="cam"> Hi Cam</div>
-        <div id="results" style="visibility: hidden; position:absolute;"></div>
-        <button onclick="savePhoto()">Save</button>
-        </div>
+    <h1>Capture Photo</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="capture-btn">Capture</button>
+
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+
         
         <form action="../job_save.php" method="post">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -127,35 +130,64 @@
 <script type="text/javascript" src="js/cam/webcam.min.js"></script>
 
     <script ype="text/javascript">
-function configure() {
-    var constraints = {
-        video: {
-            facingMode: { exact: 'environment'}
-        }
-    };
+        navigator.mediaDevices.enumerateDevices()
+            .then(function(devices) {
+                var videoDevices = devices.filter(function(device) {
+                    return device.kind === 'videoinput';
+                });
 
-    Webcam.set({
-        constraints: constraints,
-        width: 480,
-        height: 360,
-        image_format: 'jpeg',
-        jpeg_quality: 100
-    });
+                var constraints = {
+                    video: {
+                        facingMode: {
+                            exact: 'environment' // Use 'environment' for back camera
+                        }
+                    }
+                };
 
-    Webcam.attach('#cam');
-}
-        function savePhoto() {
-            Webcam.snap(function(data_uri){
-                document.getElementById('results').innerHTML = 
-                '<img id="webcam" src="'+data_uri+'" >';
+                if (videoDevices.length > 0) {
+                    constraints.video.deviceId = videoDevices[0].deviceId;
+                }
+
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(function(stream) {
+                        var video = document.getElementById('video');
+                        video.srcObject = stream;
+                        video.play();
+                    })
+                    .catch(function(error) {
+                        console.log("Error accessing camera: " + error);
+                    });
+            })
+            .catch(function(error) {
+                console.log("Error enumerating devices: " + error);
             });
-            Webcam.reset();
+
+        document.getElementById('capture-btn').addEventListener('click', function() {
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
             
-            var base64image = document.getElementById('webcam').src;
-            Webcam.upload(base64image,'photo_upload.php',function(code,text){
-                alert('Upload successful');
-            });
-        }
+            canvas.toBlob(function(blob) {
+                var formData = new FormData();
+                formData.append('photo', blob, 'photo.jpg');
+
+                $.ajax({
+                    url: 'upload_photo.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log('Photo uploaded successfully.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error uploading photo: ' + error);
+                    }
+                });
+            }, 'image/jpeg', 0.9);
+        });
     </script>
 
 

@@ -4,10 +4,20 @@ include("../connect.php");
 $job_no='1';
 
 
-if(isset($_FILES['webcam']["tmp_name"])){
-    $tmp_name=$_FILES['webcam']["tmp_name"];
-    $image_name=date('YmdHis').'.jpeg';
-    move_uploaded_file($tmp_name,'job_img/'.$image_name);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_FILES['photo'])) {
+        $targetDir = 'job_img/';
+        $targetFile = $targetDir . date('ymdHis').".jpg";
+
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) {
+            echo 'Photo uploaded successfully.';
+        } else {
+            echo 'Error uploading photo.';
+        }
+    } else {
+        echo 'No photo found.';
+    }
+
 
 $date=date('Y-m-d');
 $time=date('H:i:s');
