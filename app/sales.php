@@ -33,7 +33,7 @@
                  $result->bindParam(':userid', $res);
                  $result->execute();
                  for($i=0; $row = $result->fetch(); $i++){ ?>
-            <option product_price="<?php echo $row['sell'];?>" value="<?php echo $row['product_id'];?>"><?php echo $row['name']; ?></option>
+            <option product_price="<?php echo $row['sell'];?>" value="<?php echo $row['product_id'];?>"><?php echo $row['code']."_".$row['name']; ?></option>
             <?php	} ?>
         </select>
         <input type="number" name="qty" class="model-box" style="width:15%;" placeholder="QTY">
