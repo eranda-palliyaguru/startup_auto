@@ -34,17 +34,13 @@
     <br>
 
     <center>
-    <h1>Capture Photo</h1>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="capture-btn">Capture</button>
 
-    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
 
         
         <form action="../job_save.php" method="post">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2 " name="cus" style="width: 100%;">
-                <option value="0">Vehicle No</option>
+                <option value="0" selected disabled>Vehicle No</option>
                     <?php 
 			 $result = $db->prepare("SELECT * FROM vehicle ");
 		$result->bindParam(':userid', $res);
