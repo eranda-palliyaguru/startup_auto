@@ -26,7 +26,7 @@
 <body>
     <?php include("../connect.php"); ?>
     <br><br>
-    <a href="job_view.php?id=<?php echo $_GET['id']; ?>"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
+    <a href="index.php"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
     <br><br>
     <h2 style="margin:15px">NEW CUSTOMER</h2>
     <br>
