@@ -103,7 +103,7 @@
     <?php } ?>
     <br>
     <a href="job_add.php"> <button class="model-box" style="width: 150px;">ADD JOB</button> </a> 
-    <a href="customer_add.php"> <button class="model-box" style="width: 150px;">ADD CUSTOMER</button> </a>
+    <a href="customer_add.php" class="pull-right"> <button class="model-box" style="width: 150px;">ADD CUSTOMER</button> </a>
     <br>
     <?php 				  
         $result = $db->prepare("SELECT job.id, job.time, job.date, job.km, job.vehicle_no,customer.customer_name, customer.contact, job.invoice_no  FROM job INNER JOIN customer ON job.cus_id=customer.id WHERE job.type='active'  ORDER by job.id ASC ");
