@@ -3,10 +3,10 @@ include("../connect.php");
 
 $job_no=$_POST['job_no'];
 
-$result = $db->prepare("SELECT * FROM job_inspection WHERE type > '2' ORDER by id ASC ");
+$result = $db->prepare("SELECT * FROM job_inspection WHERE type >= '2' ORDER by id ASC ");
 $result->bindParam(':userid', $res);
 $result->execute();
-for($i=0; $row = $result->fetch(); $i++){
+for($i=0; $row = $result->fetch(); $i++){  
 $ins_id=$row['id'];
 
 $name=$row['name'];
