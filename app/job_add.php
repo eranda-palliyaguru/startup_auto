@@ -29,6 +29,7 @@
     <?php include('preload.php'); include("../connect.php"); ?>
     <br><br>
     <a href="index.php"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
+    <a href="customer_add.php" class="pull-right"> <button class="model-box color-red" style="width: 150px;">ADD CUSTOMER</button> </a>
     <br><br>
     <h2 style="margin:15px">ADD NEW JOB</h2>
     <br>
