@@ -80,7 +80,7 @@
                  $result->bindParam(':userid', $res);
                  $result->execute();
                  for($i=0; $row = $result->fetch(); $i++){ ?>
-                 <input type="hidden" name="type" value="non">
+                 <input type="hidden" name="type<?php echo $row['id'] ?>" value="non">
 
 
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">

@@ -13,13 +13,13 @@ $resultj = $db->prepare("SELECT * FROM job WHERE type='active'  ORDER by id ASC 
 		$reason=$rowj['reason'];
 				$vehicle=$rowj['vehicle_no'];
 					
-					$result1 = $db->prepare("SELECT * FROM customer WHERE vehicle_no='$vehicle'");
+					$result1 = $db->prepare("SELECT * FROM vehicle WHERE vehicle_no='$vehicle'");
 				$result1->bindParam(':userid', $date);
                 $result1->execute();
                 for($i=0; $row1 = $result1->fetch(); $i++){
 				$idi=$row1['customer_id'];	
 					$name=$row1['customer_name'];
-					$phone=$row1['contact'];
+					$phone=0;
 					$phone2=0;
 				}
 					
