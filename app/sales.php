@@ -27,20 +27,22 @@
     <br>
 
     <form action="../sales_save.php" method="post">
-        <select class="select2" id="product"  name="name" style="width: 78%;">
+        <select class="select2" id="product" name="name" style="width: 78%;">
             <?php  $total=0;
                   $result = $db->prepare("SELECT * FROM product  ");
                  $result->bindParam(':userid', $res);
                  $result->execute();
                  for($i=0; $row = $result->fetch(); $i++){ ?>
-            <option product_price="<?php echo $row['sell'];?>" value="<?php echo $row['product_id'];?>"><?php echo $row['code']."_".$row['name']; ?></option>
+            <option product_price="<?php echo $row['sell'];?>" value="<?php echo $row['product_id'];?>">
+                <?php echo $row['code']."_".$row['name']; ?></option>
             <?php	} ?>
         </select>
         <input type="number" name="qty" class="model-box" style="width:15%;" placeholder="QTY">
         <input type="hidden" name="end" value="app">
         <input type="hidden" name="invoice" value="<?php echo $invo; ?>">
     </form>
-<b id="price_dis" style="margin: 10px;"></b>
+    <b id="price_dis" style="margin: 10px;"></b>
+   
     <br>
     <div class="model-box">
         <table style="width: 96%;  margin:2%; text-align:center;">
@@ -70,6 +72,8 @@
                         </form>
                     </td>
                     <td align="right"><?php echo $total+=$row['amount'] ?></td>
+                    <td style="display: none;" class="dll"><a href="../sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>&end=app">
+                            <button class="btn btn-danger"><i class="fa fa trash">X</i></button></a></td>
                 </tr>
                 <tr>
                     <td> _</td>
@@ -79,7 +83,7 @@
 
         </table>
     </div>
-
+    <button onclick="dllshow()" class="model-box v-1 color-red">Delete</button>
     <div class="model-box">
         <h3 align="right" style="margin: 10px;">Rs.<?php echo number_format($total,2); ?></h3>
         <h3 align="right" style="margin: 10px;"><?php echo $row1['pay_type'] ?></h3>
@@ -116,7 +120,7 @@
                 </div>
             </div>
 
-            
+
             <?php if($email==""){}else{ ?>
             <div class="col-md-3">
                 <input id="vehicle2" type="checkbox" name="email" value="1">
@@ -130,7 +134,7 @@
                 <div class="model-box">
                     <!-- /btn-group -->
                     <input type="number" class="model-box" style="width:70%" name="km" value="5000">
-                        <label>Km</label>
+                    <label>Km</label>
                 </div>
             </div>
 
@@ -139,50 +143,50 @@
             <div class="col-md-2 col-sm-4 col-lg-4" style="margin: 20px;">
                 <div class="model-box">
                     <div class="row">
-                    <label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
-                                Cash 
-                            </label>
-                        </div>
-                    </label>
+                        <label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type" id="optionsRadios1" value="Cash" checked>
+                                    Cash
+                                </label>
+                            </div>
+                        </label>
 
-                    <label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="type" id="optionsRadios1" value="Card">
-                                Card 
-                            </label>
-                        </div>
-                    </label>
+                        <label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type" id="optionsRadios1" value="Card">
+                                    Card
+                                </label>
+                            </div>
+                        </label>
 
-                    <label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="type" id="optionsRadios3" value="Credit">
-                                Credit 
-                            </label>
-                        </div>
-                    </label>
+                        <label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type" id="optionsRadios3" value="Credit">
+                                    Credit
+                                </label>
+                            </div>
+                        </label>
 
                     </div>
                     <!-- /btn-group -->
-                    <input type="number" style="width:50%"  class="model-box" name="amount" value="">
-                    
-                        <label>Pay Amount</label>
-                    
+                    <input type="number" style="width:50%" class="model-box" name="amount" value="">
+
+                    <label>Pay Amount</label>
+
                 </div>
             </div>
-            
+
             <input type="hidden" class="form-control" name="total" value="<?php echo $total; ?>">
-            <input type="hidden" class="form-control" name="invoice" value="<?php echo $invo; ?>"> 
+            <input type="hidden" class="form-control" name="invoice" value="<?php echo $invo; ?>">
             <input type="hidden" name="end" value="app">
             <input class="btn btn-info " type="submit" value="Pay and Print" style="margin: 20px;">
         </form>
     </div>
     <br><br>
-    
+
     <div class="hederbar" style="overflow-x:auto;">
         <table>
             <tr>
@@ -222,14 +226,21 @@
 <script src="../../../plugins/select2/select2.full.min.js"></script>
 
 <script>
-
-
-$('#product').change(function () {
-    var price=$(this).find('option:selected').attr('product_price');
-    document.getElementById('price_dis').innerHTML="Price: <i style='color:#FF4A4A;'>"+ price+"</i>";
+$('#product').change(function() {
+    var price = $(this).find('option:selected').attr('product_price');
+    document.getElementById('price_dis').innerHTML = "Price: <i style='color:#FF4A4A;'>" + price + "</i>";
 });
 
+function dllshow() {
 
+
+ var all_col=document.getElementsByClassName('dll');
+  for(var i=0;i<all_col.length;i++)
+  {
+   all_col[i].style.display='block';
+  }
+   
+}
 
 $(function() {
     //Initialize Select2 Elements
