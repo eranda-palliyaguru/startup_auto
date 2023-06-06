@@ -102,6 +102,7 @@
         </div>
         
             <input type="hidden" name="end" value="app">
+            <input type="hidden" name="cus_id" id='cus_id' value="0">
             <input type="submit" value="Save" class="login-btn">
             
         </form>
@@ -131,6 +132,7 @@ console.log("old customer");
     document.getElementById('address').value = json.address;
     document.getElementById('email').value = json.email;
     document.getElementById('birthday').value = json.birthday;
+    document.getElementById('cus_id').value = json.id;
 
     document.getElementById('name').disabled = true;
     document.getElementById('address').disabled = true;
@@ -143,6 +145,7 @@ console.log("old customer");
     document.getElementById('address').value = '' ;
     document.getElementById('email').value =  '';
     document.getElementById('birthday').value = "" ;
+    document.getElementById('cus_id').value = "0" ;
 
     document.getElementById('name').disabled = false ;
     document.getElementById('address').disabled = false;

@@ -5,6 +5,7 @@ include('../connect.php');
 
 
 $phone=$_GET["phone"];
+
 $name='nott';
 
 $result = $db->prepare("SELECT * FROM customer WHERE contact='$phone' ");
@@ -15,12 +16,13 @@ $name=$row['customer_name'];
 $birthday=$row['birthday'];
 $email=$row['email'];
 $address=$row['address'];
+$id=$row['id'];
 
 }
 if($name =='nott'){$response = array('action'=>'false');
 }else{
 
-$response = array('name'=>$name,'birthday'=>$birthday,'email'=>$email,'address'=>$address,'action'=>'true');
+$response = array('name'=>$name,'birthday'=>$birthday,'email'=>$email,'address'=>$address,'id'=>$id,'action'=>'true');
 }
 
 
