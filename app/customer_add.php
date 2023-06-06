@@ -40,32 +40,35 @@
         <form action="../save_cus.php" method="post">
 
         <div class="row">
+
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <input class="model-box color-purple" type="text" name="cus_name" placeholder="Customer Name">
+            <input class="model-box color-purple" type="text" id='phone' name="phone_no" onchange="ex_cus()" placeholder="Phone No" autocomplete="off">
         </div>
 
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <input class="model-box color-purple" type="text" name="phone_no" placeholder="Phone No">
+            <input class="model-box color-purple" type="text" id='name' name="cus_name" placeholder="Customer Name" autocomplete="off">
+        </div>
+
+        
+
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+            <input class="model-box color-purple" type="text" id='email' name="email" placeholder="E-mail" autocomplete="off">
         </div>
 
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <input class="model-box color-purple" type="text" name="email" placeholder="E-mail">
+            <input class="model-box color-purple" type="text" id='address' name="address" placeholder="Address" autocomplete="off">
         </div>
 
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <input class="model-box color-purple" type="text" name="address" placeholder="Address">
+            <input class="model-box color-purple" type="text" id='birthday' name="birthday" placeholder="Birthday" autocomplete="off">
         </div>
 
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <input class="model-box color-purple" type="text" name="birthday" placeholder="Birthday">
+            <input class="model-box" type="text" name="vehicle_no" placeholder="Vehicle No" autocomplete="off">
         </div>
 
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <input class="model-box" type="text" name="vehicle_no" placeholder="Vehicle No">
-        </div>
-
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-                <select class="model-box select2" name="model" style="width: 80%;">
+                <select class="model-box select2" name="model" style="width: 80%;" >
 
                 <option value="0" selected disabled>Model</option>
                     <?php  $invo = $_GET['id'];
@@ -111,6 +114,44 @@
 <script src="../../../plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="js/cam/webcam.min.js"></script>
 <script>
+function ex_cus(){
+    var phone = document.getElementById('phone').value;
+    var data='ur';
+    fetch("customer_data.php?phone="+phone)
+  .then((response) => response.json())
+  .then((json) => fill(json));
+}
+
+function fill(json) {
+    
+
+    if(json.action == "true"){
+console.log("old customer");
+    document.getElementById('name').value = json.name;
+    document.getElementById('address').value = json.address;
+    document.getElementById('email').value = json.email;
+    document.getElementById('birthday').value = json.birthday;
+
+    document.getElementById('name').disabled = true;
+    document.getElementById('address').disabled = true;
+    document.getElementById('email').disabled = true;
+    document.getElementById('birthday').disabled = true;
+
+}else{
+    console.log("new customer");
+    document.getElementById('name').value = '';
+    document.getElementById('address').value = '' ;
+    document.getElementById('email').value =  '';
+    document.getElementById('birthday').value = "" ;
+
+    document.getElementById('name').disabled = false ;
+    document.getElementById('address').disabled = false;
+    document.getElementById('email').disabled = false;
+    document.getElementById('birthday').disabled = false;
+}
+}
+
+
 $(function() {
     //Initialize Select2 Elements
     $(".select2").select2();
