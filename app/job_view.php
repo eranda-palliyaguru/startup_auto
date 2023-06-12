@@ -17,6 +17,7 @@ for($i=0; $row = $result->fetch(); $i++){
     $invo=$row['invoice_no'];
     $cus_id=$row['cus_id'];
     $vehicle_id=$row['vehicle_id'];
+    $path=$row['img'];
 
 
 $result1 = $db->prepare("SELECT *  FROM customer  WHERE id='$cus_id'  ");
@@ -218,6 +219,7 @@ for($i=0; $row = $result1->fetch(); $i++){
         </table>
     </div>
     <?php } ?>
+    <img src="<?php echo $path; ?>" width="200px" alt="">
     <br><br>
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
  <form action="../save_cancel_job.php" method="post">
