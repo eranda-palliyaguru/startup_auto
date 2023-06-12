@@ -131,7 +131,7 @@ if(isset($_POST["submit"])){
     $status = 'error'; 
     if(!empty($_FILES["fileToUpload"]["name"])) { 
         // File info 
-        $fileName = basename($_FILES["fileToUpload"]["name"]); 
+        $fileName = date('ymdHis'); 
         $imageUploadPath = $uploadPath . $fileName; 
         $fileType = pathinfo($imageUploadPath, PATHINFO_EXTENSION); 
          
