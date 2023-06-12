@@ -61,13 +61,13 @@
 
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <select class="model-box select2" name="type" style="width: 100%;">
-
+                
                     <?php  $invo = $_GET['id'];
                   $result = $db->prepare("SELECT * FROM job_type WHERE action='' ORDER by order_no ASC ");
                  $result->bindParam(':userid', $res);
                  $result->execute();
                  for($i=0; $row = $result->fetch(); $i++){ ?>
-                    <option value="<?php echo $row['id'];?>"><?php echo $row['name']; ?></option>
+                    <option value="<?php echo $row['id'];?>" <?php if($row['id']==1){echo "selected";} ?> ><?php echo $row['name']; ?></option>
                     <?php	} ?>
                 </select>
             </div>
