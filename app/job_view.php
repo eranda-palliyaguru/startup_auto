@@ -219,7 +219,7 @@ for($i=0; $row = $result1->fetch(); $i++){
         </table>
     </div>
     <?php } ?>
-    <img src="<?php echo $path; ?>" width="200px" alt="">
+    <img src="../<?php echo $path; ?>" width="200px" alt="">
     <br><br>
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
  <form action="../save_cancel_job.php" method="post">
