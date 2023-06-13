@@ -48,8 +48,8 @@ $q = $db->prepare($sql);
 $q->execute(array($pro_id,$id));
 
 }
-
-header("location: product_view.php");
+if(isset($_POST['end'])){ $invo=$_POST['invo']; header("location: app/sales.php?id=$invo"); }else{
+header("location: product_view.php");}
 
 
 ?>

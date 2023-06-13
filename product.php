@@ -502,7 +502,6 @@ include_once("sidebar.php");
                                                     </div>
 
                                                     <input type="hidden" name="type" value="Quick">
-                                                    <input type="hidden" name="category" value="0">
                                                     <input class="btn btn-info" type="submit" value="Submit">
                                                 </div>
                                             </div>

@@ -11,8 +11,10 @@
     <?php include('preload.php'); include("../connect.php"); $id=$_GET['id'];?>
     <br><br>
     <a href="index.php"><i style="font-size:30px; color:#3A3939; margin:6%" class="ion-chevron-left"></i></a>
+    <a href="quick_product.php?id=<?php echo $_GET['id'] ?>"><div class="model-box color-purple v-2 pull-right">Quick Product</div></a>
     <br>
     <H2 style="margin: 10px;">SALES</H2>
+    
     <br><br>
     <?php $result1 = $db->prepare("SELECT * FROM sales WHERE  invoice_number='$id' ");
         $result1->bindParam(':userid', $date);
