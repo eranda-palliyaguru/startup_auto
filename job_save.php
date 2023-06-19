@@ -53,7 +53,7 @@ include("connect.php");
 }else{
 
 
-
+$imageUploadPath='';
 
 $job_type = $_POST['type'];
 $km = $_POST['km'];
@@ -127,7 +127,7 @@ $uploadPath = "job_img/";
  
 // If file upload form is submitted 
 $status = $statusMsg = ''; 
-if(isset($_POST["submit"])){ 
+if(isset($_POST["fileToUpload"])){ 
     $status = 'error'; 
     if(!empty($_FILES["fileToUpload"]["name"])) { 
         // File info 
@@ -159,7 +159,7 @@ if(isset($_POST["submit"])){
 } 
  
 // Display status message 
-echo $statusMsg; 
+//echo $statusMsg; 
 
   
 
