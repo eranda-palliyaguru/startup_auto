@@ -44,10 +44,10 @@
                 <option value="0" selected disabled>Vehicle No</option>
                     <?php 
 			 $result = $db->prepare("SELECT * FROM vehicle ");
-		$result->bindParam(':userid', $res);
-		$result->execute();
-		for($i=0; $row = $result->fetch(); $i++){
-	?>
+		     $result->bindParam(':userid', $res);
+		     $result->execute();
+		     for($i=0; $row = $result->fetch(); $i++){
+	             ?>
                     <option value="<?php echo $row['id'];?>"><?php echo $row['vehicle_no']; ?> (
                         <?php echo $row['manufacture']; ?>-<?php echo $row['model']; ?> ) </option>
                     <?php
