@@ -116,6 +116,14 @@
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <input type="file" name="fileToUpload" id="fileToUpload" class="model-box" style="width: 100%;">
             </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                <input type="file" name="fileToUpload2" id="fileToUpload2" class="model-box" style="width: 100%;">
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                <input type="file" name="fileToUpload3" id="fileToUpload3" class="model-box" style="width: 100%;">
+            </div>
             <br>
             <input type="submit" name="submit" value="Save" class="login-btn">
             <input type="hidden" name="end" value="app">

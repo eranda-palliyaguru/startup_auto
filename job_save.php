@@ -54,6 +54,9 @@ include("connect.php");
 
 
 $imageUploadPath='';
+$imageUploadPath2='';
+$imageUploadPath3='';
+$imageUploadPath4='';
 
 $job_type = $_POST['type'];
 $km = $_POST['km'];
@@ -157,7 +160,101 @@ if(isset($_POST["fileToUpload"])){
         $statusMsg = 'Please select an image file to upload.'; 
     } 
 } 
+
+
+if(isset($_POST["fileToUpload2"])){ 
+    $status = 'error'; 
+    if(!empty($_FILES["fileToUpload2"]["name"])) { 
+        // File info 
+        $fileName = "2".date('ymdHis').'.'.pathinfo($_FILES["fileToUpload2"]["name"], PATHINFO_EXTENSION); 
+        $imageUploadPath2 = $uploadPath . $fileName; 
+        $fileType = pathinfo($imageUploadPath2, PATHINFO_EXTENSION); 
+         
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+            // Image temp source 
+            $imageTemp = $_FILES["fileToUpload2"]["tmp_name"]; 
+             
+            // Compress size and upload image 
+            $compressedImage = compressImage($imageTemp, $imageUploadPath2, 60); 
+             
+            if($compressedImage){ 
+                $status = 'success'; 
+                $statusMsg = "Image compressed successfully."; 
+            }else{ 
+                $statusMsg = "Image compress failed!"; 
+            } 
+        }else{ 
+            $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
+        } 
+    }else{ 
+        $statusMsg = 'Please select an image file to upload.'; 
+    } 
+} 
  
+if(isset($_POST["fileToUpload3"])){ 
+    $status = 'error'; 
+    if(!empty($_FILES["fileToUpload3"]["name"])) { 
+        // File info 
+        $fileName = "2".date('ymdHis').'.'.pathinfo($_FILES["fileToUpload3"]["name"], PATHINFO_EXTENSION); 
+        $imageUploadPath3 = $uploadPath . $fileName; 
+        $fileType = pathinfo($imageUploadPath3, PATHINFO_EXTENSION); 
+         
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+            // Image temp source 
+            $imageTemp = $_FILES["fileToUpload3"]["tmp_name"]; 
+             
+            // Compress size and upload image 
+            $compressedImage = compressImage($imageTemp, $imageUploadPath3, 60); 
+             
+            if($compressedImage){ 
+                $status = 'success'; 
+                $statusMsg = "Image compressed successfully."; 
+            }else{ 
+                $statusMsg = "Image compress failed!"; 
+            } 
+        }else{ 
+            $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
+        } 
+    }else{ 
+        $statusMsg = 'Please select an image file to upload.'; 
+    } 
+} 
+
+
+if(isset($_POST["fileToUpload4"])){ 
+    $status = 'error'; 
+    if(!empty($_FILES["fileToUpload4"]["name"])) { 
+        // File info 
+        $fileName = "2".date('ymdHis').'.'.pathinfo($_FILES["fileToUpload4"]["name"], PATHINFO_EXTENSION); 
+        $imageUploadPath4 = $uploadPath . $fileName; 
+        $fileType = pathinfo($imageUploadPath4, PATHINFO_EXTENSION); 
+         
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+            // Image temp source 
+            $imageTemp = $_FILES["fileToUpload4"]["tmp_name"]; 
+             
+            // Compress size and upload image 
+            $compressedImage = compressImage($imageTemp, $imageUploadPath4, 60); 
+             
+            if($compressedImage){ 
+                $status = 'success'; 
+                $statusMsg = "Image compressed successfully."; 
+            }else{ 
+                $statusMsg = "Image compress failed!"; 
+            } 
+        }else{ 
+            $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
+        } 
+    }else{ 
+        $statusMsg = 'Please select an image file to upload.'; 
+    } 
+} 
 // Display status message 
 //echo $statusMsg; 
 
@@ -168,9 +265,9 @@ if(isset($_POST["fileToUpload"])){
 
 
 
-$sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id,img) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id,:img)";
+$sql = "INSERT INTO job (vehicle_no,km,note,type,date,time,product_note,job_type,job_no,cus_id,vehicle_id,img,img2,img3,img4) VALUES (:ve,:km,:note,:type,:date,:time,:pro,:j_type,:job_no,:cus_id,:vehicle_id,:img,:img2,:img3,:img4)";
 $q = $db->prepare($sql);
-$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id,':img'=>$imageUploadPath));
+$q->execute(array(':ve'=>$vehicle,':km'=>$km,':note'=>$note,':type'=>$type,':date'=>$date,':time'=>$time,':pro'=>$product,':j_type'=>$job_type,':job_no'=>$nba,':cus_id'=>$customer_id,':vehicle_id'=>$vehicle_id,':img'=>$imageUploadPath,':img2'=>$imageUploadPath2,':img3'=>$imageUploadPath3,':img4'=>$imageUploadPath4));
 
 //echo $customer_id;
 
