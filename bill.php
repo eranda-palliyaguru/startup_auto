@@ -160,7 +160,7 @@ body {
 		$hh=date("Y/m/d");
 		$invo=$_GET['id'];
 					$tot_amount=0;
-				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo'");
+				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND type=''");
 					$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
