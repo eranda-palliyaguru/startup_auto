@@ -13,9 +13,10 @@ $result1 = $db->prepare("SELECT * FROM package_list WHERE package_id = '$id' ");
 $result1->bindParam(':userid', $res);
 $result1->execute();
 for($i=0; $row1 = $result1->fetch(); $i++){
-$product_id=$row1['package_id'];
+$product_id=$row1['product_id'];
 $qty=$row1['qty'];
 $price=$row1['price'];
+
 
 $result = $db->prepare("SELECT * FROM product WHERE product_id = '$product_id' ");
 $result->bindParam(':userid', $res);
