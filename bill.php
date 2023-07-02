@@ -170,15 +170,15 @@ body {
                 <tr>
 				<td><?php echo $row['code'];?></td>
                   <td><?php echo $row['name'];?></td>
-					<td><?php echo $u_pri;?></td>
+					<td><?php echo $row['price'];?></td>
 				  <td><?php echo $row['qty'];?></td>
                   <?php
 					if($dis_tot>0){
 					?>
 					<td><?php echo $row['dic'];?></td>
 					<?php } ?>
-                  <td style="text-align: right;" >Rs.<?php echo $row['price'];?></td>
-					<?php $tot_amount+= $row['price'];?>
+                  <td style="text-align: right;" >Rs.<?php echo $row['amount'];?></td>
+					<?php $tot_amount+= $row['amount'];?>
                   <?php } ?>
                  </tr>
                  
