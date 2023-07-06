@@ -30,6 +30,44 @@
 body {
     font-family: 'Poppins';
 }
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 18%;
+}
+
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 18%;
+}
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 58%;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 57%;
+}
+
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>
 </head>
 <body onload="window.print() " style=" font-size: 13px; font-family: 'Poppins';">
@@ -236,7 +274,36 @@ body {
 	
             </div> 
 <center>
-	<br><br><br><br>
+<div class="container">
+  <img src="img/bill car.svg" class="car-img" alt="Snow" style="width:40%;">
+  <div class="bottom-left">
+	<?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='48' AND job_no='$job_no' ");		
+		$result1->bindParam(':userid', $date);
+        $result1->execute();
+        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?></div>
+  <div class="top-left">
+
+  <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='47' AND job_no='$job_no' ");		
+		$result1->bindParam(':userid', $date);
+        $result1->execute();
+        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
+  </div>
+
+  <div class="top-right">
+  <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='46' AND job_no='$job_no' ");		
+		$result1->bindParam(':userid', $date);
+        $result1->execute();
+        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
+  </div>
+
+  <div class="bottom-right">
+  <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='45' AND job_no='$job_no' ");		
+		$result1->bindParam(':userid', $date);
+        $result1->execute();
+        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
+  </div>
+
+</div>
 	<i>CARE THE PRIDE IN YOUR RIDE</i><br>
 <img src="img/cloud arm name.svg" width="100" alt="">
 </center>
