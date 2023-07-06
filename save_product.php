@@ -30,16 +30,15 @@ $sql = "INSERT INTO product (name,code,type,sell,cost,re_order,category,time) VA
 $ql = $db->prepare($sql);
 $ql->execute(array(':a'=>$a,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':rack'=>$rack,':time'=>$time));
 
+$result = $db->prepare("SELECT * FROM product ORDER BY product_id DESC LIMIT 1");
+$result->bindParam(':userid', $date);
+$result->execute();
+for($i=0; $row = $result->fetch(); $i++){
+    $pro_id=$row['product_id'];
+    $id=0;
+}
 
 if($c=='Service'){
-
-    $result = $db->prepare("SELECT * FROM product ORDER BY product_id DESC LIMIT 1");
-    $result->bindParam(':userid', $date);
-    $result->execute();
-    for($i=0; $row = $result->fetch(); $i++){
-        $pro_id=$row['product_id'];
-        $id=0;
-    }
 
     $sql = "UPDATE use_product
         SET main_product=?
@@ -48,7 +47,11 @@ $q = $db->prepare($sql);
 $q->execute(array($pro_id,$id));
 
 }
-if(isset($_POST['end'])){ $invo=$_POST['invo']; header("location: app/sales.php?id=$invo"); }else{
+if(isset($_POST['end'])){ 
+    
+    
+    $invo=$_POST['invo']; header("location: sales_save.php?invoice=$invo&name=$pro_id&qty=1&end=app"); 
+}else{
 header("location: product_view.php");}
 
 

@@ -89,7 +89,6 @@
             <input type="hidden" name="type" value="Quick">
             <input type="hidden" name="cost" value="0">
             <input type="hidden" name="invo" value="<?php echo $_GET['id']; ?>">
-            <input type="hidden" name="end" value="app">
             <input type="submit" value="Save" class="login-btn">
 
         </form>
