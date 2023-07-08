@@ -198,7 +198,7 @@ body {
 		$hh=date("Y/m/d");
 		$invo=$_GET['id'];
 					$tot_amount=0;
-				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND type=''");
+				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND type='' OR type='Quick' ");
 					$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
@@ -294,7 +294,7 @@ body {
 		$result1->bindParam(':userid', $date);
         $result1->execute();
         for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
-  </div>
+  </div> 
 
   <div class="bottom-right">
   <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='45' AND job_no='$job_no' ");		
