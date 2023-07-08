@@ -222,7 +222,7 @@ $style='style="color:red" ';
                                                     href="sales_dll.php?id=<?php echo $row['id']; ?>&invo=<?php echo $invo; ?>">
                                                     <button class="btn btn-danger"><i
                                                             class="fa fa trash">X</i></button></a></td>
-                                            <?php  $total+=$row['price']; ?>
+                                            <?php  $total+=$row['amount']; ?>
                                         </tr>
                                         <?php
 		}
