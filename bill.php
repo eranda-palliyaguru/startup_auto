@@ -198,12 +198,14 @@ body {
 		$hh=date("Y/m/d");
 		$invo=$_GET['id'];
 					$tot_amount=0;
-				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo' AND type='' OR type='Quick' ");
+				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo'  ");
 					$result->bindParam(':userid', $date);
                 $result->execute();
                 for($i=0; $row = $result->fetch(); $i++){
 					$u_to=$row['price']+$row['dic'];
 					$u_pri=$u_to/$row['qty'];
+
+          if($row['type']=='Materials'){}else{
 			?>
                 <tr>
 				<td><?php echo $row['code'];?></td>
@@ -217,7 +219,7 @@ body {
 					<?php } ?>
                   <td style="text-align: right;" >Rs.<?php echo $row['amount'];?></td>
 					<?php $tot_amount+= $row['amount'];?>
-                  <?php } ?>
+                  <?php }  }?>
                  </tr>
                  
                  <tr>
@@ -225,7 +227,13 @@ body {
                      <td></td>
                      <td></td>
                      <td></td>
-                     <td></td><td></td>
+                     <?php
+					if($dis_tot>0){
+					?>
+					<td></td>
+					<?php } ?>
+                    
+                     <td >Rs.<?php echo number_format($tot_amount,2); ?></td>
                  </tr>
                 </tbody>
               </table>
