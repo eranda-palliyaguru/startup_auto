@@ -122,7 +122,7 @@ body {
          <h5> <b>STARTUP Auto Care</b></h5>
          Call: 0112 150 400<br>
          E-mail: startupautoare@gmail.com<br><br>
-         To:<br>
+         To:
          <?php echo $cus_name; ?>
 
          </p>
