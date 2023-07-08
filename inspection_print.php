@@ -120,13 +120,9 @@ body {
         <div class="col-xs-6">
         <img src="bill.jpg" width="145" alt="">
          <h5> <b>STARTUP Auto Care</b></h5>
-         <p>52/B/1, 10th Mile Post,  <br>
-			Katuwawala,  <br>
-			Boralasgauwa <BR>
-         <br>
          Call: 0112 150 400<br>
          E-mail: startupautoare@gmail.com<br><br>
-         Bill To:<br>
+         To:<br>
          <?php echo $cus_name; ?>
 
          </p>
@@ -138,9 +134,7 @@ body {
 		  
 		  
         <div class="col-xs-6">
-          <h1 class="pull-right"><?php if ($co=="qt"){ echo "Quotation";}
-           if($co > 0){ echo "INVOICE"; }
-           ?></h1>
+          <h1 class="pull-right">INSPECTION</h1>
            <h5 class="pull-right"><b class="pull-right">#<?php echo $_GET['id']; ?></b><br><br>
            		  Date:<?php date_default_timezone_set("Asia/Colombo"); 
     echo date("Y-m-d"); echo "  Time-";  echo date("h:ia")  ?></h5>
@@ -180,149 +174,45 @@ body {
               <table id="example1" class="table">
                 <thead>
                 <tr style="background-color: #737373; color:#eee">
-				<th>Part Number</th>
+				
 				<th>Decs</th>
-					<th>Unit Price</th>
-                  <th>Qty</th>
-                  <?php
-					if($dis_tot>0){
-					?>
-					<th>Disc</th>
-					<?php } ?>
-                  <th>Amount </th>
+					<th>Type</th>
+                  <th>Note</th>
                 </tr>
                 </thead>
                 <tbody>
 				<?php
 			date_default_timezone_set("Asia/Colombo");
-		$hh=date("Y/m/d");
-		$invo=$_GET['id'];
-					$tot_amount=0;
-				$result = $db->prepare("SELECT * FROM sales_list WHERE   invoice_no='$invo'  ");
-					$result->bindParam(':userid', $date);
-                $result->execute();
-                for($i=0; $row = $result->fetch(); $i++){
-					$u_to=$row['price']+$row['dic'];
-					$u_pri=$u_to/$row['qty'];
-
-          if($row['type']=='Materials'){}else{
-			?>
-                <tr>
-				<td><?php echo $row['code'];?></td>
-                  <td><?php echo $row['name'];?></td>
-					<td><?php echo $row['price'];?></td>
-				  <td><?php echo $row['qty'];?></td>
-                  <?php
-					if($dis_tot>0){
-					?>
-					<td><?php echo $row['dic'];?></td>
-					<?php } ?>
-                  <td style="text-align: right;" >Rs.<?php echo $row['amount'];?></td>
-					<?php $tot_amount+= $row['amount'];?>
-                  <?php }  }?>
-                 </tr>
+            $hh=date("Y/m/d");
+            $invo=$_GET['id'];
+                        $tot_amount=0;
+                    $result = $db->prepare("SELECT * FROM job_list WHERE   job_no='$job_no'  ");
+                        $result->bindParam(':userid', $date);
+                    $result->execute();
+                    for($i=0; $row = $result->fetch(); $i++){
+                ?>
+                    <tr>
+                    <td><?php echo $row['name'];?></td>
+                      <td><?php echo $row['type'];?></td>
+                        <td><?php echo $row['note'];?></td>
+                      <?php } ?>
+                     </tr>
                  
-                 <tr>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <?php
-					if($dis_tot>0){
-					?>
-					<td></td>
-					<?php } ?>
-                    
-                     <td >Rs.<?php echo number_format($tot_amount,2); ?></td>
-                 </tr>
+                 
                 </tbody>
               </table>
-	<?php
-				$result1 = $db->prepare("SELECT * FROM sales WHERE   invoice_number='$invo'  ");		
-					$result1->bindParam(':userid', $date);
-                $result1->execute();
-                for($i=0; $row1 = $result1->fetch(); $i++){
-				//$tot_amount=$row1['amount'];
-					$balance=$row1['balance'];
-				}
-			?>  
-			<div class="col-xs-5 pull-right">
-			    <div class="row" >
-					    <div class="col-xs-6">
-					       <h4 class="pull-right">Total</h4>
-					    </div>
-					    <div class="col-xs-6">
-					       <h4><b class="pull-right">Rs.<?php echo number_format($tot_amount,2); ?></b> </h4>
-					       
-					    </div>
-					</div>
-					<?php if ($co>0){ ?>
-					<div class="row" >
-					    <div class="col-xs-6">
-					       <p class="pull-right">Pay Amount</p> 
-					    </div>
-					    <div class="col-xs-6">
-					       <p class="pull-right">Rs.<?php echo number_format($tot_amount+$balance,2); ?></p> 
-					    </div>
-					</div>
-					
-					<div class="row" >
-					    <div class="col-xs-6">
-					       <p class="pull-right">Balance:</p> 
-					    </div>
-					    <div class="col-xs-6">
-					       <p class="pull-right">Rs.<?php echo number_format($balance,2); ?></p> 
-					    </div>
-					</div>
-					<?php } ?>
-			</div>
+ 
+			
 
 
 
 	
             </div> 
-<center>
-<div class="container">
-  <img src="img/bill car.svg" class="car-img" alt="Snow" style="width:40%;">
-  <div class="bottom-left">
-	<?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='48' AND job_no='$job_no' ");		
-		$result1->bindParam(':userid', $date);
-        $result1->execute();
-        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?></div>
-  <div class="top-left">
-
-  <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='47' AND job_no='$job_no' ");		
-		$result1->bindParam(':userid', $date);
-        $result1->execute();
-        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
-  </div>
-
-  <div class="top-right">
-  <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='46' AND job_no='$job_no' ");		
-		$result1->bindParam(':userid', $date);
-        $result1->execute();
-        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
-  </div> 
-
-  <div class="bottom-right">
-  <?php $result1 = $db->prepare("SELECT * FROM job_list WHERE   ins_id='45' AND job_no='$job_no' ");		
-		$result1->bindParam(':userid', $date);
-        $result1->execute();
-        for($i=0; $row = $result1->fetch(); $i++){ echo $row['note'];} ?>
-  </div>
-
-</div>
-	<i>CARE THE PRIDE IN YOUR RIDE</i><br>
-<img src="img/cloud arm name.svg" width="100" alt="">
-</center>
-
-	  
-	
         </div>
   </section>
   <?php
 $sec = "1";
-?><meta http-equiv="refresh" content="<?php echo $sec;?>;<?php if($email==1){echo "URL='email_invoice/email.php?id=".$invo."'";}else{echo "URL='inspection_print.php?id=".$invo."'";} ?>">
+?><meta http-equiv="refresh" content="<?php echo $sec;?>;<?php if($email==1){echo "URL='email_invoice/email.php?id=".$invo."'";}else{echo "URL='index.php'";} ?>">
 </div>
 </body>
 </html>
