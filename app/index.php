@@ -300,11 +300,11 @@
             <i class="ion-stats-bars menu-icon"></i>
             <span class="nav-text">Reports</span>
         </div>
-        <div class="nav-item" id="#">
+        <div class="nav-item " id="product.php">
             <i class="material-icons search-icon menu-icon">
                 search
             </i>
-            <span class="nav-text">Search</span>
+            <span class="nav-text">Product</span>
         </div>
 
     </nav>
