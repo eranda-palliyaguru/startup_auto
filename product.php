@@ -285,7 +285,7 @@ include_once("sidebar.php");
 
                                                                     <div class="form-group" id="sub_list">
                                                                         <table width='100%' class='table'>
-                                                                            <?php $result = $db->prepare("SELECT * FROM use_product WHERE system_id ='' ");
+                                                                            <?php $result = $db->prepare("SELECT * FROM use_product WHERE main_product  ='0' ");
                                                                              $result->bindParam(':userid', $res);
                                                                              $result->execute();
                                                                              for($i=0; $row = $result->fetch(); $i++){

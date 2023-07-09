@@ -1,29 +1,21 @@
 <?php
 session_start();
 include('connect.php');
-$a = $_POST['sell'];
-$b = $_POST['cost'];
+$name = $_POST['name'];
+$code = $_POST['code'];
+$sell = $_POST['sell'];
+$cost = $_POST['cost'];
 $id =$_POST['id'];
-$re =$_POST['re'];
+$type =$_POST['type'];
 
 
 $sql = "UPDATE product 
-        SET sell=?
+        SET sell=?,cost=?,name=?,code=?,type=?
 		WHERE product_id=?";
 $q = $db->prepare($sql);
-$q->execute(array($a,$id));
+$q->execute(array($sell,$cost,$name,$code,$type,$id));
 
-$sql = "UPDATE product 
-        SET cost=?
-		WHERE product_id=?";
-$q = $db->prepare($sql);
-$q->execute(array($b,$id));
 
-$sql = "UPDATE product 
-        SET re_order=?
-		WHERE product_id=?";
-$q = $db->prepare($sql);
-$q->execute(array($re,$id));
 
 header("location: product_view.php");
 
