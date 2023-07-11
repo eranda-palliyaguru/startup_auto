@@ -267,6 +267,20 @@
           </a>
         </li>
 		  
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>HR</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+           </span>
+         </a>
+          <ul class="treeview-menu">
+             <li><a href="hr_employee.php"><i class="fa fa-user text-yellow"></i>Employee</a></li>
+            <li><a href="hr_attendance.php"><i class="fa  fa-500px text-yellow"></i>Attendance</a></li>
+            <li><a href="hr_salary_advance.php"><i class="fa fa-money text-yellow"></i>Advance</a></li>
+            <li><a href="hr_payroll.php"><i class="fa fa-list-alt text-red"></i>Payroll </a></li>
+          </ul>
+        </li>
 		  
 	    <li class="treeview">
           <a href="#">
