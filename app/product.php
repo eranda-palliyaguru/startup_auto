@@ -22,7 +22,7 @@
     <br>
     <?php include("../connect.php");
     if(!$_GET["number"]){ $result = $db->prepare("SELECT *  FROM product ");}else{ $number=$_GET["number"];
-        $result = $db->prepare("SELECT *  FROM product WHERE name LIKE '$number%'");
+        $result = $db->prepare("SELECT *  FROM product WHERE name LIKE '%$number%'");
     }
     
     $result->bindParam(':userid', $date);
